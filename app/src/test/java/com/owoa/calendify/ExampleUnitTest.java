@@ -1,4 +1,4 @@
-package com.haebun.calendify;
+package com.owoa.calendify;
 
 import org.junit.Test;
 
