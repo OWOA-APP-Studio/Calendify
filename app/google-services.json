@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:240330508957:android:b81da8cf1ab002f2fa6274",
         "android_client_info": {
-          "package_name": "com.haebun.calendify"
+          "package_name": "com.owoa.calendify"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "240330508957-bp7o8p6u55vv5krr3utf82hrb8dlfn2h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.haebun.calendify",
+            "package_name": "com.owoa.calendify",
             "certificate_hash": "ba89f0f357133b847a216aff216cf9cd8d9131b6"
           }
         },

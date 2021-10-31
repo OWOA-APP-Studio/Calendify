@@ -2,10 +2,13 @@ package com.owoa.calendify;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.owoa.calendify.intro.IntroActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,11 +18,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView textView = (TextView) findViewById(R.id.textView);
+        Intent intent = new Intent(this, IntroActivity.class);
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "안녕하세요 테스트입니다.", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         });
     }

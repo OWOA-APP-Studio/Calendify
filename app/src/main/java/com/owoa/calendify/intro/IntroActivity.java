@@ -1,9 +1,12 @@
 package com.owoa.calendify.intro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.owoa.calendify.R;
@@ -25,7 +28,8 @@ public class IntroActivity extends AppCompatActivity {
         socialLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                introPresenter.socialLogin();
+                introPresenter.setActivity(activity);
+                introPresenter.onClickSocialLogin();
             }
         });
 
@@ -42,5 +46,11 @@ public class IntroActivity extends AppCompatActivity {
                 introPresenter.signUp();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        introPresenter.socialLogin(requestCode,resultCode,data);
     }
 }
