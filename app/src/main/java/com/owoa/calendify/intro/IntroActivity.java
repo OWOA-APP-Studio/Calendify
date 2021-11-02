@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,21 +28,21 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 introPresenter.setActivity(activity);
-                introPresenter.onClickSocialLogin();
+                introPresenter.onClickSocialSignIn();
             }
         });
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                introPresenter.signIn();
+                introPresenter.onClickSignIn();
             }
         });
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                introPresenter.signUp();
+                introPresenter.onClickSignUp();
             }
         });
     }
@@ -51,6 +50,6 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        introPresenter.socialLogin(requestCode,resultCode,data);
+        introPresenter.socialSignIn(requestCode,resultCode,data);
     }
 }

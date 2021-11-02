@@ -24,7 +24,7 @@ public class IntroPresenter {
         this.activity = activity;
     }
 
-    public void onClickSocialLogin() {
+    public void onClickSocialSignIn() {
         GoogleSignInClient mGoogleSignInClient;
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(activity.getString(R.string.default_web_client_id))
@@ -37,10 +37,8 @@ public class IntroPresenter {
         activity.startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    public void socialLogin(int requestCode, int resultCode, @Nullable Intent data) {
+    public void socialSignIn(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
@@ -49,23 +47,24 @@ public class IntroPresenter {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            updateUI(account);
+            updateUIFromSocialLogin(account);
         } catch (ApiException e) {
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            Log.w(TAG, "handleSignInResult:failed code=" + e.getStatusCode());
         }
     }
 
-    private void updateUI(GoogleSignInAccount account) {
-        Toast.makeText(activity, account.getDisplayName()+"님, 환영합니다." +
-                "\nId:"+account.getId() +
-                "\nEmail:"+account.getEmail(), Toast.LENGTH_SHORT).show();
+    private void updateUIFromSocialLogin(GoogleSignInAccount account) {
+        IntroData userData = new IntroData(account);
+        Toast.makeText(activity, userData.getName()+"님, 환영합니다." +
+                "\nId:"+userData.getId() +
+                "\nEmail:"+userData.getEmail(), Toast.LENGTH_SHORT).show();
     }
 
-    public void signIn() {
+    public void onClickSignIn() {
 
     }
 
-    public void signUp() {
+    public void onClickSignUp() {
 
     }
 }
