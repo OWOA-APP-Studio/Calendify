@@ -14,6 +14,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.owoa.calendify.R;
 import com.owoa.calendify.sign.in.SignInActivity;
+import com.owoa.calendify.sign.up.SignUpActivity;
 
 import static android.content.ContentValues.TAG;
 
@@ -67,6 +68,7 @@ public class IntroPresenter {
     }
 
     public void onClickSignUp() {
-
+        Intent signUpIntent = new Intent(activity, SignUpActivity.class);
+        activity.startActivity(signUpIntent);
     }
 }
