@@ -13,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.owoa.calendify.R;
+import com.owoa.calendify.account.UserPresenter;
 import com.owoa.calendify.sign.in.SignInActivity;
 import com.owoa.calendify.sign.up.SignUpActivity;
 
@@ -49,17 +50,17 @@ public class IntroPresenter {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            updateUIFromSocialLogin(account);
+            updateUI(account);
         } catch (ApiException e) {
             Log.w(TAG, "handleSignInResult:failed code=" + e.getStatusCode());
         }
     }
 
-    private void updateUIFromSocialLogin(GoogleSignInAccount account) {
-        IntroData userData = new IntroData(account);
-        Toast.makeText(activity, userData.getName()+"님, 환영합니다." +
-                "\nId:"+userData.getId() +
-                "\nEmail:"+userData.getEmail(), Toast.LENGTH_SHORT).show();
+    private void updateUI(GoogleSignInAccount account) {
+        UserPresenter userPresenter = new UserPresenter(account);
+        Toast.makeText(activity, userPresenter.getInfoData().getName()+"님, 환영합니다." +
+                "\nId:"+userPresenter.getInfoData().getId() +
+                "\nEmail:"+userPresenter.getInfoData().getEmail(), Toast.LENGTH_SHORT).show();
     }
 
     public void onClickSignIn() {
