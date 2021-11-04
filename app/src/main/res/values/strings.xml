@@ -14,6 +14,9 @@
     
     <string name="checkbox_day">매일 반복</string>
     <string name="checkbox_week">매주 반복</string>
+
     
     <string name="button_add">추 가</string>
+    <string name="button_date">날짜 추가</string>
+
 </resources>
