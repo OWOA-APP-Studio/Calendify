@@ -10,7 +10,7 @@ import android.widget.EditText;
 import com.owoa.calendify.R;
 
 public class SignUpActivity extends AppCompatActivity {
-    SignUpPresenter presenter;
+    SignUpPresenter presenter = new SignUpPresenter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

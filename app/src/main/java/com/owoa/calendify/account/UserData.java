@@ -5,18 +5,25 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 public class UserData {
     private String email;
     private String id;
-    private String name;
+    private String nickname;
     private String password;
 
     public UserData(GoogleSignInAccount account) {
         this.email = account.getEmail();
         this.id = account.getId();
-        this.name = account.getDisplayName();
+        this.nickname = account.getDisplayName();
     }
 
     public UserData(String id, String password) {
         this.id = id;
         this.password = password;
+    }
+
+    public UserData(String id, String password, String email, String nickname) {
+        this.id = id;
+        this.password = password;
+        this.nickname = nickname;
+        this.email = email;
     }
 
     public String getEmail() {
@@ -31,8 +38,15 @@ public class UserData {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNickname() {
+        return nickname;
     }
 
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
