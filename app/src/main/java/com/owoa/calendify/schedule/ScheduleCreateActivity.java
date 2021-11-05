@@ -140,9 +140,9 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
                 y = year;
                 m = month+1;
                 d = dayOfMonth;
-
             }
         },year, month-1, day);
+        edittext_date.setText(y+m+d);
         datePickerDialog.setMessage("날짜");
         datePickerDialog.show();
 
