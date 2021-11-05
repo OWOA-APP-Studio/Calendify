@@ -7,6 +7,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.owoa.calendify.R;
+import com.owoa.calendify.intro.IntroActivity;
 
 public class LoadingActivity extends AppCompatActivity {
     // 3초 이후 자동 로그인 -> MainActivity 혹은 인트로 화면 이동
@@ -22,7 +23,7 @@ public class LoadingActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(LoadingActivity.this, LoadingActivity.class);
+                Intent intent = new Intent(LoadingActivity.this, IntroActivity.class);
                 startActivity(intent);
             }
         }, loadingTime);
