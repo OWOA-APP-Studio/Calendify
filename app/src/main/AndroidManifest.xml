@@ -9,15 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Calendify">
-        <activity android:name="com.owoa.calendify.MainActivity">
+        <activity android:name=".schedule.ScheduleCreateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".sign.in.SignInActivity"/>
         <activity android:name=".intro.IntroActivity"/>
+
+
+
     </application>
 
 </manifest>
