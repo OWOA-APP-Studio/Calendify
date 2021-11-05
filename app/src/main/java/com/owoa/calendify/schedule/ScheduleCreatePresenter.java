@@ -10,7 +10,7 @@ public class ScheduleCreatePresenter implements Contract.Presenter {
 
     //Presenter를 상속하고 addNum 구현
     @Override
-    public void get(String name, String detail, String category ,String repeat) {
-        view.showResult(name,detail,category,repeat);
+    public void get(String name, String detail, String category ,int week) {
+        view.showResult(name,detail,category,week);
     }
 }

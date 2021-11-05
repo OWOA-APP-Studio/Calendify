@@ -6,7 +6,8 @@
     <string name="text_time">시간</string>
     <string name="text_detail">상세내용</string>
     <string name="text_category">카테고리</string>
-    
+    <string name="text_week">몇주 입력</string>
+
     <string name="edittext_name">일정명</string>
     <string name="edittext_date">시간</string>
     <string name="edittext_time">날짜</string>
