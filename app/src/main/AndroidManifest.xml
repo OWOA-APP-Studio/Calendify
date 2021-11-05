@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".schedule.ScheduleCreateActivity"/>
         <activity android:name=".sign.in.SignInActivity" />
         <activity android:name=".sign.up.SignUpActivity" />
         <activity android:name=".intro.IntroActivity" />
     </application>
-
 </manifest>
