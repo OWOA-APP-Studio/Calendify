@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".schedule.ScheduleCreateActivity">
 
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="258dp"
@@ -16,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.307"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.669" />
+        app:layout_constraintVertical_bias="0.629" />
 
     <TextView
         android:id="@+id/tv_result"
@@ -29,7 +30,7 @@
         app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.669" />
+        app:layout_constraintVertical_bias="0.627" />
 
     <TextView
         android:id="@+id/title"
@@ -95,17 +96,16 @@
 
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintHorizontal_bias="0.136"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.611" />
+        app:layout_constraintVertical_bias="0.561" />
 
     <EditText
         android:id="@+id/sample_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -122,9 +122,8 @@
 
     <EditText
         android:id="@+id/sample.date"
-        android:layout_width="92dp"
+        android:layout_width="83dp"
         android:layout_height="48dp"
-        android:layout_weight="1"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -132,18 +131,17 @@
 
         android:text="@string/edittext_date"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333"
+        app:layout_constraintVertical_bias="0.307"
         tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
 
     <EditText
         android:id="@+id/sample.Time"
-        android:layout_width="88dp"
-        android:layout_height="49dp"
-        android:layout_weight="1"
+        android:layout_width="81dp"
+        android:layout_height="48dp"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -151,18 +149,17 @@
 
         android:text="@string/edittext_time"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.631"
+        app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.332"
+        app:layout_constraintVertical_bias="0.379"
         tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/sample.Detail"
         android:layout_width="228dp"
         android:layout_height="48dp"
-        android:layout_weight="1"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -174,32 +171,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.525"
+        app:layout_constraintVertical_bias="0.499"
         tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
-
-    <CheckBox
-        android:id="@+id/day_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/checkbox_day"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.762" />
-
-    <CheckBox
-        android:id="@+id/week_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/checkbox_week"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.853" />
 
     <Button
         android:id="@+id/add_button"
@@ -215,14 +188,52 @@
 
     <Button
         android:id="@+id/date_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="99dp"
+        android:layout_height="48dp"
         android:text="@string/button_date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.414"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.417" />
+        app:layout_constraintVertical_bias="0.307" />
+
+    <Button
+        android:id="@+id/time_button"
+        android:layout_width="99dp"
+        android:layout_height="48dp"
+        android:text="@string/button_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.378" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="240dp"
+        android:layout_height="110dp"
+        android:layout_marginEnd="124dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.784">
+
+        <RadioButton
+            android:id="@+id/radioButton_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radiobutton_day"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+        <RadioButton
+            android:id="@+id/radioButton_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radiobutton_week" />
+
+    </RadioGroup>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
