@@ -1,27 +1,8 @@
 package com.owoa.calendify.intro;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.owoa.calendify.server.ServerData;
 
-public class IntroData {
-    private String email;
-    private String id;
-    private String name;
-
-    public IntroData(GoogleSignInAccount account) {
-        this.email = account.getEmail();
-        this.id = account.getId();
-        this.name = account.getDisplayName();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
+public class IntroData extends ServerData {
+    final static String REQUEST_SOCIAL_SIGN_IN_URL = URL + "sign/in_google.php";
+    final static String REQUEST_SOCIAL_SIGN_UP_URL = URL + "sign/up_google.php";
 }
