@@ -20,6 +20,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.owoa.calendify.R;
+import com.owoa.calendify.intro.IntroPresenter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -67,6 +68,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_create);
         ScheduleCreatePresenter = new ScheduleCreatePresenter((Contract.View) this);
+
         spinner = (Spinner) findViewById(R.id.spinner);
         tv_result = (TextView) findViewById(R.id.tv_result);
         add_button = (Button) findViewById(R.id.add_button);
@@ -93,6 +95,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
                 repeat = radioButton_day.getText().toString();
                 week = 0;
             } else if(i == R.id.radioButton_week){
+                repeat = radioButton_week.getText().toString();
                 week = Integer.parseInt(tv_week.getText().toString());
             }
         }
@@ -108,10 +111,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+            public void onNothingSelected(AdapterView<?> parent) { }});
 
         // 추가 버튼 //
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -121,8 +121,10 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
                 String name = sample_Name.getText().toString();
                 String detail = sample_detail.getText().toString();
                 String category = tv_result.getText().toString();
-                ScheduleCreatePresenter.get(name,detail,category,week);
-                ScheduleCreateModel.saveData(tv_result);
+                String date = edittext_date.getText().toString();
+                String time= edittext_time.getText().toString();
+                ScheduleCreatePresenter.get(name,detail,category,repeat,week,date,time);
+
             }
         });
 
@@ -146,7 +148,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
     }
 
     // 날짜 //
-    void showDate() {
+    private void showDate() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -165,7 +167,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
     }
 
     // 시간 //
-    void showTime() {
+    private void showTime() {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -182,8 +184,13 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
 
     // Contract //
     @Override
-    public void showResult(String name, String detail, String category ,int week) {
-        Toast.makeText(getApplicationContext(),("일정 추가 완료" + "\n"+ name + "\n" + detail + "\n" + category + "\n" + week),Toast.LENGTH_LONG).show();
+    public void showResult(String name, String detail, String category,
+                           String repeat ,int week,String date,String time) {
+        Toast.makeText(getApplicationContext(),("일정 추가 완료" + "\n"
+                + "일정명: " + name + "\n" + "상세내용: " + detail + "\n"
+                +"카테고리 명: " + category + "\n"
+                +"반복종류: "+ repeat + " " + week +" 주"+ "\n"
+                +"날짜: " + date + "\n"+"시간: " + time),Toast.LENGTH_LONG).show();
     }
 
 }
