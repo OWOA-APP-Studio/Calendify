@@ -12,6 +12,7 @@ import com.owoa.calendify.R;
 
 public class IntroActivity extends AppCompatActivity {
     IntroPresenter introPresenter = new IntroPresenter();
+    Button socialLoginButton, signInButton, signUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +20,9 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
         introPresenter.setActivity(this);
 
-        Button socialLoginButton = (Button) findViewById(R.id.social_login);
-        Button signInButton = (Button) findViewById(R.id.sign_in);
-        Button signUpButton = (Button) findViewById(R.id.sign_up);
+        socialLoginButton = (Button) findViewById(R.id.social_login);
+        signInButton = (Button) findViewById(R.id.sign_in);
+        signUpButton = (Button) findViewById(R.id.sign_up);
 
         socialLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -11,6 +11,8 @@ import com.owoa.calendify.R;
 
 public class SignUpActivity extends AppCompatActivity {
     SignUpPresenter presenter = new SignUpPresenter();
+    EditText signUpId, signUpPassword, signUpEmail, signUpNickname;
+    Button signUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +20,15 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         presenter.setActivity(this);
-        EditText signUpId = (EditText) findViewById(R.id.sign_up_id);
-        EditText signUpPassword = (EditText) findViewById(R.id.sign_up_password);
-        EditText signUpEmail = (EditText) findViewById(R.id.sign_up_email);
-        EditText signUpNickname = (EditText) findViewById(R.id.sign_up_nickname);
 
-        Button sign_up_button = (Button) findViewById(R.id.sign_up_button);
+        signUpId = (EditText) findViewById(R.id.sign_up_id);
+        signUpPassword = (EditText) findViewById(R.id.sign_up_password);
+        signUpEmail = (EditText) findViewById(R.id.sign_up_email);
+        signUpNickname = (EditText) findViewById(R.id.sign_up_nickname);
 
-        sign_up_button.setOnClickListener(new View.OnClickListener() {
+        signUpButton = (Button) findViewById(R.id.sign_up_button);
+
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String id = signUpId.getText().toString();

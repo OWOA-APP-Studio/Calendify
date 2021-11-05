@@ -39,8 +39,7 @@ public class SignInPresenter {
         StringRequest signInRequest = new StringRequest(Request.Method.POST, REQUEST_SIGN_IN_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(activity.getApplicationContext(), "서버 통신 성공" + response.toString(), Toast.LENGTH_SHORT).show();
-                Log.d("LOGIN-ERR", response);
+                Toast.makeText(activity.getApplicationContext(), "서버 통신 결과" + response.toString(), Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override

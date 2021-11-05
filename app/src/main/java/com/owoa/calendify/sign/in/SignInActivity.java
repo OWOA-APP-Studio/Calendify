@@ -12,6 +12,9 @@ import com.owoa.calendify.R;
 
 public class SignInActivity extends AppCompatActivity {
     SignInPresenter presenter;
+    EditText signInID, signInPassword;
+    Button signInButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +23,9 @@ public class SignInActivity extends AppCompatActivity {
 
         presenter = new SignInPresenter(this);
 
-        EditText signInID = (EditText) findViewById(R.id.sign_up_id);
-        EditText signInPassword = (EditText) findViewById(R.id.sign_up_password);
-        Button signInButton = (Button) findViewById(R.id.sign_up_button);
+        signInID = (EditText) findViewById(R.id.sign_up_id);
+        signInPassword = (EditText) findViewById(R.id.sign_up_password);
+        signInButton = (Button) findViewById(R.id.sign_up_button);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
