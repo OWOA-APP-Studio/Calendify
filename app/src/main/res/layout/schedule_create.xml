@@ -136,39 +136,38 @@
         tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
 
     <TextView
+        android:id="@+id/sample_time"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:minHeight="48dp"
+
+        android:text="@string/edittext_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.376"
+        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
+
+    <TextView
         android:id="@+id/sample_date"
-        android:layout_width="83dp"
-        android:layout_height="48dp"
+        android:layout_width="135dp"
+        android:layout_height="41dp"
         android:ems="10"
         android:importantForAutofill="no"
         android:minHeight="48dp"
 
         android:text="@string/edittext_date"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307"
+        app:layout_constraintVertical_bias="0.298"
         tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
-
-    <EditText
-        android:id="@+id/sample.Time"
-        android:layout_width="81dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-
-        android:text="@string/edittext_time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.379"
-        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/sample.Detail"

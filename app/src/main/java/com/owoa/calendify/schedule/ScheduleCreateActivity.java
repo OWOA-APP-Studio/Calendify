@@ -25,10 +25,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ScheduleCreateActivity extends AppCompatActivity implements Contract.View {
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     SimpleDateFormat mFormat_year = new SimpleDateFormat("yyyy");
     SimpleDateFormat mFormat_month = new SimpleDateFormat("MM");
     SimpleDateFormat mFormat_day = new SimpleDateFormat("dd");
+
+    SimpleDateFormat mFormat_hour = new SimpleDateFormat("hh");
+    SimpleDateFormat mFormat_minute = new SimpleDateFormat("mm");
+
 
     long now = System.currentTimeMillis();
     Date date = new Date(now);
@@ -38,10 +43,14 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
     private int month = Integer.parseInt(mFormat_month.format(date));
     private int day = Integer.parseInt(mFormat_day.format(date));
 
+    private int hour = Integer.parseInt(mFormat_hour.format(date));
+    private int minute = Integer.parseInt(mFormat_minute.format(date));
+
     private Spinner spinner;
     private TextView tv_result;
     private TextView tv_week;
     private TextView edittext_date;
+    private TextView edittext_time;
     private Button add_button, date_button, time_button;
     private RadioButton radioButton_day,radioButton_week;
     private RadioGroup radioGroup;
@@ -69,6 +78,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
         radioButton_day = findViewById(R.id.radioButton_day);
         radioButton_week = findViewById(R.id.radioButton_week);
         edittext_date = (TextView) findViewById(R.id.sample_date);
+        edittext_time = (TextView) findViewById(R.id.sample_time);
         tv_week = (TextView) findViewById(R.id.tv_week);
         radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
         init();
@@ -90,7 +100,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
 
 
     protected void init() {
-
+        //카테고리 선택//
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -103,6 +113,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
             }
         });
 
+        // 추가 버튼 //
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,14 +126,15 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
             }
         });
 
+        // 날짜 선택 버튼 //
         date_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDate();
-
             }
         });
 
+        // 시간 선택 버튼 //
         time_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,6 +145,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
 
     }
 
+    // 날짜 //
     void showDate() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -140,32 +153,37 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
                 y = year;
                 m = month+1;
                 d = dayOfMonth;
+                edittext_date.setText(String.format("%d년 %d월 %d일", y,m,d));
             }
+
         },year, month-1, day);
-        edittext_date.setText(y+m+d);
+
         datePickerDialog.setMessage("날짜");
         datePickerDialog.show();
 
+
     }
 
+    // 시간 //
     void showTime() {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 h = hourOfDay;
                 mi = minute;
-
+                edittext_time.setText(String.format("%d시 %d분", h,mi));
             }
-        }, 21, 12, true);
+        }, hour, minute, true);
 
         timePickerDialog.setMessage("시간");
         timePickerDialog.show();
     }
 
+
+    // Contract //
     @Override
     public void showResult(String name, String detail, String category ,int week) {
         Toast.makeText(getApplicationContext(),("일정 추가 완료" + "\n"+ name + "\n" + detail + "\n" + category + "\n" + week),Toast.LENGTH_LONG).show();
-//        ((TextView)findViewById(R.id.title)).setText(answer + num2 + num3);
     }
 
 }
