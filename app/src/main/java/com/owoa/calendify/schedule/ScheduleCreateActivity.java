@@ -55,7 +55,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
     private Button add_button, date_button, time_button;
     private RadioButton radioButton_day,radioButton_week;
     private RadioGroup radioGroup;
-    private EditText sample_Name , sample_detail;
+    private EditText sample_Name , sample_detail, sample_location;
     private Contract.Presenter ScheduleCreatePresenter;
     private String repeat;
 
@@ -74,8 +74,11 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
         add_button = (Button) findViewById(R.id.add_button);
         date_button = (Button) findViewById(R.id.date_button);
         time_button = (Button) findViewById(R.id.time_button);
+
         sample_Name = (EditText) findViewById(R.id.sample_Name);
         sample_detail = (EditText) findViewById(R.id.sample_Detail);
+        sample_location = (EditText) findViewById(R.id.sample_location);
+
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         radioButton_day = findViewById(R.id.radioButton_day);
         radioButton_week = findViewById(R.id.radioButton_week);
@@ -123,7 +126,8 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
                 String category = tv_result.getText().toString();
                 String date = edittext_date.getText().toString();
                 String time= edittext_time.getText().toString();
-                ScheduleCreatePresenter.get(name,detail,category,repeat,week,date,time);
+                String location = sample_location.getText().toString();
+                ScheduleCreatePresenter.get(name,detail,category,repeat,week,date,time,location);
 
             }
         });
@@ -184,13 +188,15 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
 
     // Contract //
     @Override
-    public void showResult(String name, String detail, String category,
-                           String repeat ,int week,String date,String time) {
+    public void showResult(String name, String detail, String category, String repeat ,int week,String date,String time, String location) {
         Toast.makeText(getApplicationContext(),("일정 추가 완료" + "\n"
-                + "일정명: " + name + "\n" + "상세내용: " + detail + "\n"
+                + "일정명: " + name + "\n"
+                + "상세내용: " + detail + "\n"
                 +"카테고리 명: " + category + "\n"
                 +"반복종류: "+ repeat + " " + week +" 주"+ "\n"
-                +"날짜: " + date + "\n"+"시간: " + time),Toast.LENGTH_LONG).show();
+                +"날짜: " + date + "\n"
+                +"시간: " + time + "\n"
+                +"장소: " + location),Toast.LENGTH_LONG).show();
     }
 
 }
