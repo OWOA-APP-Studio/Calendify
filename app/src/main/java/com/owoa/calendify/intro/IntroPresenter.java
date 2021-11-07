@@ -98,6 +98,7 @@ public class IntroPresenter {
                         autoSignIn.commit();
 
                         Intent intent = new Intent(activity, ScheduleReadActivity.class);
+                        intent.putExtra("id", id);
                         activity.startActivity(intent);
                         activity.finish();
                     }

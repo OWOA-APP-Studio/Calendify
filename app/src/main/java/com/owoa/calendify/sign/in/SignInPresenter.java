@@ -67,6 +67,7 @@ public class SignInPresenter {
                         }
 
                         Intent intent = new Intent(activity, ScheduleReadActivity.class);
+                        intent.putExtra("id", userPresenter.getInfoData().getId());
                         activity.startActivity(intent);
                         activity.finish();
                     }
