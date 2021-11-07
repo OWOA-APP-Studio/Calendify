@@ -2,6 +2,8 @@ package com.owoa.calendify.sign.in;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -11,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.owoa.calendify.R;
 import com.owoa.calendify.account.UserPresenter;
 import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
@@ -25,14 +28,18 @@ import static com.owoa.calendify.sign.in.SignInData.REQUEST_SIGN_IN_URL;
 public class SignInPresenter {
     private Activity activity;
     UserPresenter userPresenter;
+    Switch autoSignInSwitch;
 
     public SignInPresenter(Activity activity) {
         this.activity = activity;
     }
 
+    public void setAutoSwitch(Switch autoSignInSwitch) {
+        this.autoSignInSwitch = autoSignInSwitch;
+    }
+
     public void signIn(String id, String password) {
         userPresenter = new UserPresenter(id, password);
-
         if(userPresenter.isValidSignInInfo()) {
             checkAccountInfo();
         } else {
@@ -50,6 +57,15 @@ public class SignInPresenter {
 
                     if(success.equals("1")) {
                         Toast.makeText(activity, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+
+                        if(autoSignInSwitch != null && autoSignInSwitch.isChecked()) {
+                            SharedPreferences auto = activity.getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor autoSignIn = auto.edit();
+                            autoSignIn.putString("id", userPresenter.getInfoData().getId());
+                            autoSignIn.putString("password", userPresenter.getInfoData().getPassword());
+                            autoSignIn.commit();
+                        }
+
                         Intent intent = new Intent(activity, ScheduleReadActivity.class);
                         activity.startActivity(intent);
                         activity.finish();
@@ -80,4 +96,6 @@ public class SignInPresenter {
         RequestQueue queue = Volley.newRequestQueue(activity.getApplicationContext());
         queue.add(signInRequest);
     }
+
+
 }

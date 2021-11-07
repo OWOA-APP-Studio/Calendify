@@ -14,10 +14,10 @@
         android:layout_marginTop="250dp"
         android:layout_marginEnd="55dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="아이디"
-        android:textSize="12pt"
         android:gravity="left|center"
+        android:hint="아이디"
+        android:inputType="textPersonName"
+        android:textSize="12pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,10 +30,10 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="55dp"
         android:ems="10"
-        android:inputType="textPassword"
-        android:hint="비밀번호"
-        android:textSize="12pt"
         android:gravity="left|center"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        android:textSize="12pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_up_id" />
@@ -50,6 +50,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Switch
+        android:id="@+id/auto_sign_in_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="30dp"
+        android:text="자동 로그인"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,6 +21,7 @@ public class LoadingPresenter {
         if(isExistData()) {
             signInPresenter = new SignInPresenter(activity);
             if(isSocialSignInData()) {
+                introPresenter.setActivity(activity);
                 introPresenter.checkAccountInfo(data.getId());
             }
             else {
