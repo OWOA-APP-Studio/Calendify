@@ -1,18 +1,24 @@
 package com.owoa.calendify.schedule;
 
-import android.widget.TextView;
-
 public class ScheduleCreateModel {
     Contract.Presenter presenter;
     public ScheduleCreateModel(Contract.Presenter presenter){
         this.presenter = presenter;
     }
 
-    public static void saveData(TextView tv_result) {
-    }
 
-    public void saveData(String data){
-        //처리 로직
-        String name = data;
-    }
+    public void save(String name, String detail, String category,String repeat, int week,String date,String time, String location){
+        name = name;
+        detail = detail;
+        category = category;
+        repeat = repeat;
+        week = week;
+        date = date;
+        time = time;
+        location = location;
+    };
+
+
+
+
 }

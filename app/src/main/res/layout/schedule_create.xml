@@ -11,13 +11,15 @@
         android:id="@+id/spinner"
         android:layout_width="258dp"
         android:layout_height="48dp"
+
         android:entries="@array/test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.307"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.629" />
+        app:layout_constraintVertical_bias="0.578" />
+
 
     <TextView
         android:id="@+id/tv_result"
@@ -27,10 +29,10 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.894"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.627" />
+        app:layout_constraintVertical_bias="0.58" />
 
     <TextView
         android:id="@+id/title"
@@ -40,7 +42,7 @@
         android:textSize="36sp"
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -58,7 +60,21 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.128" />
+        app:layout_constraintVertical_bias="0.104" />
+
+    <TextView
+        android:id="@+id/text_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_location"
+        android:textSize="18sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.782" />
 
     <TextView
         android:id="@+id/text.Time"
@@ -72,7 +88,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.258" />
+        app:layout_constraintVertical_bias="0.223" />
 
     <TextView
         android:id="@+id/text.Detail"
@@ -86,7 +102,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
+        app:layout_constraintVertical_bias="0.408" />
 
     <TextView
         android:id="@+id/text.category"
@@ -100,67 +116,85 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.561" />
+        app:layout_constraintVertical_bias="0.524" />
 
     <EditText
         android:id="@+id/sample_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="일정명입력"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-
         android:text="@string/edittext_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.233"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.183"
+        app:layout_constraintVertical_bias="0.143"
         tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
 
     <EditText
-        android:id="@+id/sample.date"
-        android:layout_width="83dp"
-        android:layout_height="48dp"
+        android:id="@+id/sample_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="장소 입력"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="48dp"
 
-        android:text="@string/edittext_date"
+        android:text="@string/edittext_location"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintHorizontal_bias="0.233"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307"
+        app:layout_constraintVertical_bias="0.844"
         tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
 
-    <EditText
-        android:id="@+id/sample.Time"
-        android:layout_width="81dp"
-        android:layout_height="48dp"
+    <TextView
+        android:id="@+id/sample_time"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
         android:ems="10"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
         android:minHeight="48dp"
 
         android:text="@string/edittext_time"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.379"
-        tools:ignore="LabelFor" />
+        app:layout_constraintVertical_bias="0.335"
+        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/sample_date"
+        android:layout_width="135dp"
+        android:layout_height="41dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:minHeight="48dp"
+
+        android:text="@string/edittext_date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.273"
+        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
 
     <EditText
         android:id="@+id/sample.Detail"
         android:layout_width="228dp"
         android:layout_height="48dp"
         android:ems="10"
+        android:hint="상세내용 입력"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -171,7 +205,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
+        app:layout_constraintVertical_bias="0.458"
         tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
 
     <Button
@@ -196,7 +230,7 @@
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307" />
+        app:layout_constraintVertical_bias="0.266" />
 
     <Button
         android:id="@+id/time_button"
@@ -208,7 +242,7 @@
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.378" />
+        app:layout_constraintVertical_bias="0.336" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -218,7 +252,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.784">
+        app:layout_constraintVertical_bias="0.713">
 
         <RadioButton
             android:id="@+id/radioButton_day"
@@ -234,6 +268,25 @@
             android:text="@string/radiobutton_week" />
 
     </RadioGroup>
+
+    <EditText
+        android:id="@+id/tv_week"
+        android:layout_width="106dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="몇주 입력"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+
+        android:text="@string/text_week"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.723"
+        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

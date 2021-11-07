@@ -18,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        <activity android:name=".loading.LoadingActivity">-->
         <activity android:name=".MainActivity"/>
         <activity android:name=".schedule.ScheduleCreateActivity"/>
         <activity android:name=".sign.in.SignInActivity" />
