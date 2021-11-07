@@ -1,6 +1,6 @@
 package com.owoa.calendify.sign.in;
 
-import android.util.Log;
+import android.app.Activity;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -18,10 +18,10 @@ import java.util.Map;
 import static com.owoa.calendify.sign.in.SignInData.REQUEST_SIGN_IN_URL;
 
 public class SignInPresenter {
-    private SignInActivity activity;
+    private Activity activity;
     UserPresenter userPresenter;
 
-    public SignInPresenter(SignInActivity activity) {
+    public SignInPresenter(Activity activity) {
         this.activity = activity;
     }
 

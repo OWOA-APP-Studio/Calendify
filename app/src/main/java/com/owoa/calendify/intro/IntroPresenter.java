@@ -74,10 +74,10 @@ public class IntroPresenter {
 
     private void updateUI(GoogleSignInAccount account) {
         userPresenter = new UserPresenter(account);
-        checkAccountInfo();
+        checkAccountInfo(account.getId());
     }
 
-    public void checkAccountInfo() {
+    public void checkAccountInfo(String id) {
         StringRequest signInRequest = new StringRequest(Request.Method.POST, REQUEST_SOCIAL_SIGN_IN_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -106,7 +106,7 @@ public class IntroPresenter {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("id", userPresenter.getInfoData().getId());
+                params.put("id", id);
                 return params;
             }
         };
