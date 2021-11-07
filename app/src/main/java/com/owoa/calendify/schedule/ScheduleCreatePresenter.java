@@ -3,7 +3,9 @@ package com.owoa.calendify.schedule;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -33,8 +35,6 @@ public class ScheduleCreatePresenter extends AppCompatActivity implements Contra
 //    private int week ,y=0, m=0, d=0, h=0, mi=0;
 //    private TextView edittext_date;
 
-
-
     public ScheduleCreatePresenter(Contract.View view){
         this.view = view;                   //Activty View정보 가져와 통신
         scheduleCreateModel = new ScheduleCreateModel(this);    //Model 객체 생성
@@ -46,8 +46,4 @@ public class ScheduleCreatePresenter extends AppCompatActivity implements Contra
         view.showResult(name, detail, category,repeat,week,date,time,location);
         scheduleCreateModel.save(name,detail,category,repeat,week,date,time,location);
     }
-
-
-
-
 }

@@ -57,7 +57,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
     private RadioGroup radioGroup;
     private EditText sample_Name , sample_detail, sample_location;
     private Contract.Presenter ScheduleCreatePresenter;
-    private String repeat;
+    private String repeat,name,detail,category,time,location;
 
 
 
@@ -93,7 +93,6 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
     RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-
             if(i == R.id.radioButton_day){
                 repeat = radioButton_day.getText().toString();
                 week = 0;
