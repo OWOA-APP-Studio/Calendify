@@ -1,5 +1,6 @@
 package com.owoa.calendify.sign.up;
 
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -10,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.owoa.calendify.account.UserPresenter;
+import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,6 +49,8 @@ public class SignUpPresenter {
 
                     if(success.equals("1")) {
                         Toast.makeText(activity, "계정을 생성했습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(activity, ScheduleReadActivity.class);
+                        activity.startActivity(intent);
                         activity.finish();
                     }
                     else {

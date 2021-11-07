@@ -14,11 +14,10 @@
     <string name="edittext_time">시간</string>
     <string name="edittext_detail">상세내용 입력</string>
     <string name="edittext_location">장소 입력</string>
-    
     <string name="radiobutton_day">매일 반복</string>
     <string name="radiobutton_week">매주 반복</string>
 
-    
+
     <string name="button_add">추 가</string>
     <string name="button_date">날짜 추가</string>
     <string name="button_time">시간 추가</string>

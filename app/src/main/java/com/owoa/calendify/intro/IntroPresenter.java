@@ -21,6 +21,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.owoa.calendify.R;
 import com.owoa.calendify.account.UserPresenter;
+import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 import com.owoa.calendify.sign.in.SignInActivity;
 import com.owoa.calendify.sign.up.SignUpActivity;
 
@@ -86,7 +87,9 @@ public class IntroPresenter {
                     String success = jsonObject.getString("success");
 
                     if(success.equals("1")) {
-                        Toast.makeText(activity, "계정을 생성했습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, "자동 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(activity, ScheduleReadActivity.class);
+                        activity.startActivity(intent);
                         activity.finish();
                     }
                     else {
