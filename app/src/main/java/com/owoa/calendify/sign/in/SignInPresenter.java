@@ -51,6 +51,7 @@ public class SignInPresenter {
                     if(success.equals("1")) {
                         Toast.makeText(activity, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(activity, ScheduleReadActivity.class);
+                        intent.putExtra("uid", userPresenter.getInfoData().getId());
                         activity.startActivity(intent);
                         activity.finish();
                     }

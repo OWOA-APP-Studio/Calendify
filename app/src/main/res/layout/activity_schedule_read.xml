@@ -62,6 +62,7 @@
                 android:text="카테고리" />
 
             <TextView
+                android:id="@+id/create_category"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="#ADEFD1"
