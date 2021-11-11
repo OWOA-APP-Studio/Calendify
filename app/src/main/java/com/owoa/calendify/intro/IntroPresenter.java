@@ -1,5 +1,6 @@
 package com.owoa.calendify.intro;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
@@ -37,10 +38,10 @@ import static com.owoa.calendify.intro.IntroData.REQUEST_SOCIAL_SIGN_UP_URL;
 
 public class IntroPresenter {
     private static final int RC_SIGN_IN = 9001;
-    IntroActivity activity;
+    Activity activity;
     UserPresenter userPresenter;
 
-    public void setActivity(IntroActivity activity) {
+    public void setActivity(Activity activity) {
         this.activity = activity;
     }
 
@@ -89,7 +90,7 @@ public class IntroPresenter {
                     if(success.equals("1")) {
                         Toast.makeText(activity, "자동 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(activity, ScheduleReadActivity.class);
-                        intent.putExtra("uid", userPresenter.getInfoData().getId());
+//                        intent.putExtra("uid", userPresenter.getInfoData().getId());
                         activity.startActivity(intent);
                         activity.finish();
                     }

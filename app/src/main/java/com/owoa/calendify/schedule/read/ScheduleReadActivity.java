@@ -1,6 +1,8 @@
 package com.owoa.calendify.schedule.read;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +12,11 @@ import android.widget.Toast;
 
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.create.CategoryCreateActivity;
+import com.owoa.calendify.category.read.CategoryListAdapter;
 
 public class ScheduleReadActivity extends AppCompatActivity {
+    ScheduleReadActivity activity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +25,13 @@ public class ScheduleReadActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String uid = intent.getStringExtra("uid");
+        activity = this;
 
         TextView categoryTextView = findViewById(R.id.create_category);
+        RecyclerView categoryView = (RecyclerView)findViewById(R.id.category_list);
+        categoryView.setLayoutManager(new LinearLayoutManager(this));
+
+        String[] categoryArray = {"Fitness", "Gaming", "Education","Animals", "Cars", "+"};
 
         categoryTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,5 +41,8 @@ public class ScheduleReadActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        categoryView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        categoryView.setAdapter(new CategoryListAdapter(categoryArray,  activity));
     }
 }
