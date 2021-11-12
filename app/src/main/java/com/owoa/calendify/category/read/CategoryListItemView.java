@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.create.CategoryCreateActivity;
 
-public class CategoryView extends FrameLayout {
+public class CategoryListItemView extends FrameLayout {
 
-    public CategoryView(Context context) {
+    public CategoryListItemView(Context context) {
         super(context);
         initializeView(context);
     }

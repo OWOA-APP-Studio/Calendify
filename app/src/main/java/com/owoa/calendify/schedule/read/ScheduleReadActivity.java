@@ -8,11 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.create.CategoryCreateActivity;
-import com.owoa.calendify.category.read.CategoryListAdapter;
+import com.owoa.calendify.category.read.CategoryAdapter;
 
 public class ScheduleReadActivity extends AppCompatActivity {
     ScheduleReadActivity activity;
@@ -43,6 +42,6 @@ public class ScheduleReadActivity extends AppCompatActivity {
         });
 
         categoryView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-        categoryView.setAdapter(new CategoryListAdapter(categoryArray,  activity));
+        categoryView.setAdapter(new CategoryAdapter(categoryArray,  activity, uid));
     }
 }
