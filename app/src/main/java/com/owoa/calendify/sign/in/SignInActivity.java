@@ -23,18 +23,15 @@ public class SignInActivity extends AppCompatActivity {
 
         presenter = new SignInPresenter(this);
 
-        signInID = (EditText) findViewById(R.id.sign_up_id);
-        signInPassword = (EditText) findViewById(R.id.sign_up_password);
-        signInButton = (Button) findViewById(R.id.sign_up_button);
+        signInID = findViewById(R.id.sign_up_id);
+        signInPassword = findViewById(R.id.sign_up_password);
+        signInButton = findViewById(R.id.sign_up_button);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String id = signInID.getText().toString();
-                String password = signInPassword.getText().toString();
+        signInButton.setOnClickListener(v -> {
+            String id = signInID.getText().toString();
+            String password = signInPassword.getText().toString();
 
-                presenter.signIn(id, password);
-            }
+            presenter.signIn(id, password);
         });
     }
 }

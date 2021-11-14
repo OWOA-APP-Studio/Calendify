@@ -4,7 +4,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 public class UserData {
     private String email;
-    private String id;
+    private final String id;
     private String nickname;
     private String password;
 
@@ -40,13 +40,5 @@ public class UserData {
 
     public String getNickname() {
         return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

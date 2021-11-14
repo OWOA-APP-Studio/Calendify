@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.owoa.calendify.R;
 
 public class LoadingActivity extends AppCompatActivity {
-    // 3초 이후 자동 로그인 -> MainActivity 혹은 인트로 화면 이동
-    private int loadingTime = 3000;
     LoadingPresenter presenter;
 
     @Override
@@ -20,11 +18,8 @@ public class LoadingActivity extends AppCompatActivity {
         presenter = new LoadingPresenter(this);
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                presenter.autoSignIn();
-            }
-        }, loadingTime);
+        // 3초 이후 자동 로그인 -> MainActivity 혹은 인트로 화면 이동
+        int loadingTime = 3000;
+        handler.postDelayed(() -> presenter.autoSignIn(), loadingTime);
     }
 }

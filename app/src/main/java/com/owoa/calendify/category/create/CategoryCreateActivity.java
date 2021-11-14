@@ -21,7 +21,7 @@ public class CategoryCreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_create);
 
         Intent intent = getIntent();
-        String uid = intent.getStringExtra("uid");
+        String uid = intent.getStringExtra(getString(R.string.uid));
 
         presenter = new CategoryCreatePresenter(this);
 
@@ -31,23 +31,14 @@ public class CategoryCreateActivity extends AppCompatActivity {
         Button colorButton = findViewById(R.id.category_color);
         Button confirmButton = findViewById(R.id.create_category_confirm);
 
-        colorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(CategoryCreateActivity.this, "ColorPicker 연결 후 컬러값 String 호출", Toast.LENGTH_SHORT).show();
-            }
-        });
+        colorButton.setOnClickListener(v ->
+                Toast.makeText(CategoryCreateActivity.this, "ColorPicker 연결 후 컬러값 String 호출", Toast.LENGTH_SHORT).show());
 
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String id = uid;
-                String name = nameEditText.getText().toString();
-                String description = descriptionEditText.getText().toString();
-                String color = "";
-
-                presenter.createCategory(id, name, description, color);
-            }
+        confirmButton.setOnClickListener(v -> {
+            String name = nameEditText.getText().toString();
+            String description = descriptionEditText.getText().toString();
+            String color = "";
+            presenter.createCategory(uid, name, description, color);
         });
     }
 }

@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.create.CategoryCreateActivity;
 
-public class CategoryListItemView extends FrameLayout {
-
-    public CategoryListItemView(Context context) {
+public class CategoryReadView extends FrameLayout {
+    String uid;
+    public CategoryReadView(Context context) {
         super(context);
         initializeView(context);
     }
@@ -27,16 +27,16 @@ public class CategoryListItemView extends FrameLayout {
         ((TextView)findViewById(R.id.categoryName)).setText(text);
 
         if(text.charAt(0) == '+') {
-            TextView view = ((TextView)findViewById(R.id.categoryName));
+            TextView view = (findViewById(R.id.categoryName));
             view.setText("  +  ");
             view.setBackgroundColor(getContext().getColor(R.color.signature));
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(activity, CategoryCreateActivity.class); // ERR
-                    activity.startActivity(intent);
-                }
+            view.setOnClickListener(v -> {
+                String uid = activity.getIntent().getStringExtra(activity.getString(R.string.uid));
+
+                Intent intent = new Intent(activity, CategoryCreateActivity.class);
+                intent.putExtra(activity.getString(R.string.uid), uid);
+                activity.startActivity(intent);
             });
         }
     }
