@@ -42,7 +42,7 @@ public class SignUpPresenter {
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 String success = jsonObject.getString("success");
-                
+
                 if(success.equals("1")) {
                     Toast.makeText(activity, "계정을 생성했습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(activity, ScheduleReadActivity.class);
