@@ -1,5 +1,6 @@
 package com.owoa.calendify.loading;
 
+import android.app.Activity;
 import android.content.Intent;
 
 import com.owoa.calendify.intro.IntroActivity;
@@ -7,7 +8,7 @@ import com.owoa.calendify.intro.IntroPresenter;
 import com.owoa.calendify.sign.in.SignInPresenter;
 
 public class LoadingPresenter {
-    LoadingActivity activity;
+    Activity activity;
     LoadingData data;
     SignInPresenter signInPresenter;
     IntroPresenter introPresenter = new IntroPresenter();
@@ -18,6 +19,7 @@ public class LoadingPresenter {
     }
 
     public void autoSignIn() {
+        introPresenter.setActivity(activity);
         if(isExistData()) {
             signInPresenter = new SignInPresenter(activity);
             if(isSocialSignInData()) {

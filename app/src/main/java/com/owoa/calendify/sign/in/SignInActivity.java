@@ -23,22 +23,17 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        signInID = (EditText) findViewById(R.id.sign_up_id);
-        signInPassword = (EditText) findViewById(R.id.sign_up_password);
-        signInButton = (Button) findViewById(R.id.sign_up_button);
-        autoSignInSwitch = (Switch) findViewById(R.id.auto_sign_in_switch);
-
         presenter = new SignInPresenter(this);
-        presenter.setAutoSwitch(autoSignInSwitch);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String id = signInID.getText().toString();
-                String password = signInPassword.getText().toString();
+        signInID = findViewById(R.id.sign_up_id);
+        signInPassword = findViewById(R.id.sign_up_password);
+        signInButton = findViewById(R.id.sign_up_button);
 
-                presenter.signIn(id, password);
-            }
+        signInButton.setOnClickListener(v -> {
+            String id = signInID.getText().toString();
+            String password = signInPassword.getText().toString();
+
+            presenter.signIn(id, password);
         });
     }
 }

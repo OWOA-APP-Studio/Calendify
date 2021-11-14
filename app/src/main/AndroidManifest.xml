@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Calendify"
         android:usesCleartextTraffic="true">
-        <activity android:name=".schedule.read.ScheduleReadActivity"></activity>
+        <activity android:name=".category.create.CategoryCreateActivity"></activity>
+        <activity android:name=".schedule.read.ScheduleReadActivity" />
         <activity android:name=".loading.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
