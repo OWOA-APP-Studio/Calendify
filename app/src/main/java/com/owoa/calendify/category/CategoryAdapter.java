@@ -14,6 +14,10 @@ public class CategoryAdapter extends RecyclerView.Adapter {
     private String[] categoryArray;
     private Activity activity;
 
+    public String[] getCategories() {
+        return categoryArray;
+    }
+
     public CategoryAdapter(String[] categoryArray, Activity activity) {
         this.categoryArray = categoryArray;
         this.activity = activity;
