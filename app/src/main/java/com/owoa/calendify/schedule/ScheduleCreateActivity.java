@@ -56,7 +56,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
     private TextView tv_week;
     private TextView edittext_date;
     private TextView edittext_time;
-    private Button add_button, date_button, time_button,add_button2;
+    private Button add_button, date_button, time_button;
     private RadioButton radioButton_day,radioButton_week;
     private RadioGroup radioGroup;
     private EditText sample_Name , sample_detail, sample_location;
@@ -76,7 +76,6 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
         spinner = (Spinner) findViewById(R.id.spinner);
         tv_result = (TextView) findViewById(R.id.tv_result);
         add_button = (Button) findViewById(R.id.add_button);
-        add_button2 = (Button) findViewById(R.id.add_button2);
         date_button = (Button) findViewById(R.id.date_button);
         time_button = (Button) findViewById(R.id.time_button);
 
@@ -91,14 +90,6 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
         edittext_time = (TextView) findViewById(R.id.sample_time);
         tv_week = (TextView) findViewById(R.id.tv_week);
         radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
-
-//        add_button2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), ScheduleUpdateActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         init();
     }
