@@ -1,6 +1,7 @@
 package com.owoa.calendify.schedule;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -21,6 +23,8 @@ import android.widget.Toast;
 
 import com.owoa.calendify.R;
 import com.owoa.calendify.intro.IntroPresenter;
+import com.owoa.calendify.schedule.Update.ScheduleUpdateActivity;
+import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,7 +56,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
     private TextView tv_week;
     private TextView edittext_date;
     private TextView edittext_time;
-    private Button add_button, date_button, time_button;
+    private Button add_button, date_button, time_button,add_button2;
     private RadioButton radioButton_day,radioButton_week;
     private RadioGroup radioGroup;
     private EditText sample_Name , sample_detail, sample_location;
@@ -64,7 +68,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_create);
         ScheduleCreatePresenter = new ScheduleCreatePresenter((Contract.View) this);
@@ -72,6 +76,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
         spinner = (Spinner) findViewById(R.id.spinner);
         tv_result = (TextView) findViewById(R.id.tv_result);
         add_button = (Button) findViewById(R.id.add_button);
+        add_button2 = (Button) findViewById(R.id.add_button2);
         date_button = (Button) findViewById(R.id.date_button);
         time_button = (Button) findViewById(R.id.time_button);
 
@@ -86,6 +91,15 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
         edittext_time = (TextView) findViewById(R.id.sample_time);
         tv_week = (TextView) findViewById(R.id.tv_week);
         radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
+
+//        add_button2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), ScheduleUpdateActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
         init();
     }
 
@@ -115,6 +129,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }});
+
 
         // 추가 버튼 //
         add_button.setOnClickListener(new View.OnClickListener() {
