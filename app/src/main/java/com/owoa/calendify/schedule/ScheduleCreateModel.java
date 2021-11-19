@@ -7,7 +7,7 @@ public class ScheduleCreateModel {
     }
 
 
-    public void save(String name, String detail, String category,String repeat, int week,String date,String time, String location){
+    public void save(String name, String detail, String category, String repeat, int week,String date,String time, String location){
         name = name;
         detail = detail;
         category = category;

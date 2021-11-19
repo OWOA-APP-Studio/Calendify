@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.owoa.calendify.R;
+import com.owoa.calendify.schedule.ScheduleModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,11 +48,13 @@ public class ScheduleReadAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.item_schedule, null);
         TextView title = view.findViewById(R.id.schedule_name);
+        TextView description = view.findViewById(R.id.schedule_item_description);
 
         try {
             if(schedules != null) {
-                JSONObject jsonObject = schedules.getJSONObject(position);
-                title.setText(jsonObject.getString("sch_ttl"));
+                ScheduleModel model = new ScheduleModel(schedules.getJSONObject(position));
+                title.setText(model.getTitle());
+                description.setText(model.getDescription());
             }
             else {
                 Toast.makeText(activity, "값이 없음", Toast.LENGTH_SHORT).show();

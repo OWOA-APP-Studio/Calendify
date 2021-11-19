@@ -48,6 +48,7 @@ public class CategoryReadPresenter {
             @Override
             public void onResponse(String response) {
                 try {
+                    Log.d("CATEGORY-LOG",response);
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("카테고리");
 

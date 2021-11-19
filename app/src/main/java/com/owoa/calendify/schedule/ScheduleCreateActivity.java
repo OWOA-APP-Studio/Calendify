@@ -128,7 +128,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
                 String time= edittext_time.getText().toString();
                 String location = sample_location.getText().toString();
                 ScheduleCreatePresenter.get(name,detail,category,repeat,week,date,time,location);
-
+                finish();
             }
         });
 

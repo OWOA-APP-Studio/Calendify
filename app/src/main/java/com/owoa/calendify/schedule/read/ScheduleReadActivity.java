@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.owoa.calendify.schedule.ScheduleCreateActivity;
+import com.owoa.calendify.schedule.ScheduleModel;
 
 public class ScheduleReadActivity extends AppCompatActivity {
     ScheduleReadActivity activity;
