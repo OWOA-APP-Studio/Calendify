@@ -1,85 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#5559b4"
+    android:id="@+id/drawer_layout"
     tools:context=".schedule.read.ScheduleReadActivity">
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="60dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="10dp"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:layout_width="250dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:text="2021년 11월 7일 화요일\nPM 2:03"
-            android:textSize="9pt" />
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="right" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="5dp">
+        tools:context=".schedule.read.ScheduleReadActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:paddingTop="10dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/category_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_height="100dp"/>
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="60dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/create_category"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="#ADEFD1"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="5dp"
                 android:gravity="center"
-                android:textColor="@color/black"
-                android:text="+" />
+                android:text="2021년 11월 7일 화요일\nPM 2:03"
+                android:textSize="9pt" />
+
+            <ImageView
+                android:id="@+id/create_navigation_button"
+                android:src="@drawable/button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:gravity="right" />
+
         </LinearLayout>
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
-            <ListView
-                android:layout_width="wrap_content"
+            android:layout_height="550dp"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#DCDCDC"/>
-        </ScrollView>
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/category_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:layout_height="100dp"/>
+
+                <TextView
+                    android:id="@+id/create_category"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="#ADEFD1"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="+" />
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#DCDCDC"/>
+            </ScrollView>
+        </LinearLayout>
+
+        <ImageView
+
+            android:id="@+id/create_schedule_button"
+            android:src="@drawable/button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp" />
+
     </LinearLayout>
 
-    <ImageView
+    <include layout="@layout/activity_schedule_navigation"/>
 
-        android:id="@+id/create_schedule_button"
-        android:src="@drawable/button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="right"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp" />
-
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
