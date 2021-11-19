@@ -123,7 +123,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="일정명입력"
+        android:hint="일정명 입력"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="48dp"

@@ -5,17 +5,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+<<<<<<< HEAD
+=======
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
+>>>>>>> feature/SDU/001
 
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.read.CategoryReadPresenter;
 import android.view.View;
 import android.widget.ImageView;
 import com.owoa.calendify.schedule.ScheduleCreateActivity;
+import com.owoa.calendify.schedule.Update.ScheduleUpdateActivity;
 
 public class ScheduleReadActivity extends AppCompatActivity {
     ScheduleReadActivity activity;
     CategoryReadPresenter categoryReadPresenter;
     String uid;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +45,15 @@ public class ScheduleReadActivity extends AppCompatActivity {
         scheduleCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ScheduleReadActivity.this, ScheduleCreateActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ScheduleCreateActivity.class);
                 startActivity(intent);
             }
         });
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature/SDU/001
     }
 }
