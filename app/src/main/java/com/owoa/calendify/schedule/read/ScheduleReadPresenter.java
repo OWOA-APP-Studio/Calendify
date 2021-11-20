@@ -29,9 +29,16 @@ public class ScheduleReadPresenter {
     JSONArray schedules;
     ListView listView;
 
-    public ScheduleReadPresenter(Activity activity, String[] categories) {
+    int category;
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public ScheduleReadPresenter(Activity activity, String[] categories, int index) {
         this.activity = (ScheduleReadActivity) activity;
         this.categories = categories;
+        this.category = index;
     }
 
     public void setListView(ListView listView) {
@@ -62,7 +69,7 @@ public class ScheduleReadPresenter {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put(activity.getString(R.string.uid), activity.getUid());
-                params.put(activity.getString(R.string.category), categories[0]);
+                params.put(activity.getString(R.string.category), categories[category]);
                 return params;
             }
         };

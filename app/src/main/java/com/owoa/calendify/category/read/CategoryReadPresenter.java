@@ -15,7 +15,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.owoa.calendify.R;
-import com.owoa.calendify.category.CategoryAdapter;
 import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
 import org.json.JSONArray;
@@ -32,11 +31,8 @@ public class CategoryReadPresenter {
     String uid;
     Activity activity;
     RecyclerView recyclerView;
-    CategoryAdapter adapter;
-
-    public CategoryAdapter getAdapter() {
-        return adapter;
-    }
+    CategoryReadAdapter adapter;
+    JSONObject jsonObject;
 
     public CategoryReadPresenter(String uid, Activity activity) {
         this.uid = uid;
@@ -49,10 +45,10 @@ public class CategoryReadPresenter {
             public void onResponse(String response) {
                 try {
                     Log.d("CATEGORY-LOG",response);
-                    JSONObject jsonObject = new JSONObject(response);
+                    jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("카테고리");
 
-                    initializeUserCategory(jsonObject);
+                    initializeUserCategory(0);
 
                     categories = new String[jsonArray.length()];
                     for(int i = 0; i < jsonArray.length(); i++) {
@@ -84,7 +80,7 @@ public class CategoryReadPresenter {
         queue.add(categoryReadRequest);
     }
 
-    private void initializeUserCategory (JSONObject jsonObject) {
+    public void initializeUserCategory (int index) {
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("카테고리");
             categories = new String[jsonArray.length()+1];
@@ -96,11 +92,11 @@ public class CategoryReadPresenter {
 
             ScheduleReadActivity scheduleReadActivity = (ScheduleReadActivity) activity;
             scheduleReadActivity.setCategories(categories);
-            scheduleReadActivity.loadSchedule();
+            scheduleReadActivity.loadSchedule(index);
         } catch (JSONException e) {
             e.printStackTrace();
         } finally {
-            adapter = new CategoryAdapter(categories, activity);
+            adapter = new CategoryReadAdapter(categories, activity, this);
             recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
             recyclerView.setAdapter(adapter);
         }

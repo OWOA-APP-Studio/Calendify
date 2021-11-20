@@ -16,6 +16,12 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/schedule_item_split1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:orientation="horizontal" />
+
             <TextView
                 android:id="@+id/schedule_item_today"
                 android:layout_width="100dp"
@@ -25,12 +31,14 @@
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/schedule_item_start_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="AM 9:00"/>
 
             <TextView
+                android:id="@+id/schedule_item_end_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -39,17 +47,29 @@
             <ProgressBar
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:id="@+id/progressBar"
+                android:id="@+id/schedule_progress_bar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progress="50"/>
+                android:progress="0"
+                android:visibility="invisible"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:background="@color/black"
+            android:layout_height="match_parent"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/schedule_item_split2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:orientation="horizontal" />
 
             <TextView
                 android:id="@+id/schedule_name"
@@ -71,11 +91,12 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="8dp"
                         android:id="@+id/schedule_item_description"
                         tools:text="안드로이드 개발해야지\n아아" />
 
                     <TextView
+                        android:id="@+id/schedule_item_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="- 호천관 202호"
@@ -88,12 +109,12 @@
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    tools:srcCompat="@tools:sample/avatars" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    tools:srcCompat="@tools:sample/avatars" />-->
             </LinearLayout>
 
         </LinearLayout>

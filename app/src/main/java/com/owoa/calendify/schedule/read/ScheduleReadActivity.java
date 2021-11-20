@@ -54,10 +54,8 @@ public class ScheduleReadActivity extends AppCompatActivity {
         this.categories = categories;
     }
 
-    public void loadSchedule() {
-        ScheduleReadPresenter presenter = new ScheduleReadPresenter(activity, categories);
-        Toast.makeText(activity, "loadSchedule 실행", Toast.LENGTH_SHORT).show();
-
+    public void loadSchedule(int index) {
+        ScheduleReadPresenter presenter = new ScheduleReadPresenter(activity, categories, index);
         presenter.setListView(findViewById(R.id.schedule_list));
         presenter.requestSchedules();
     }
