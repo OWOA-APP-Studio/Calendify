@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".schedule.ScheduleCreateActivity"/>
-        <activity android:name=".schedule.Update.ScheduleUpdateActivity"/>
+        <activity android:name=".schedule.create.ScheduleCreateActivity"/>
+        <activity android:name=".schedule.update.ScheduleUpdateActivity"/>
         <activity android:name=".sign.in.SignInActivity" />
         <activity android:name=".sign.up.SignUpActivity" />
         <activity android:name=".intro.IntroActivity" />

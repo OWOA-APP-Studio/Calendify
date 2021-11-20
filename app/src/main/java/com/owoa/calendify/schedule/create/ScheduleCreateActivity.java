@@ -1,19 +1,16 @@
-package com.owoa.calendify.schedule;
+package com.owoa.calendify.schedule.create;
 
 import androidx.annotation.IdRes;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -22,9 +19,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.owoa.calendify.R;
-import com.owoa.calendify.intro.IntroPresenter;
-import com.owoa.calendify.schedule.Update.ScheduleUpdateActivity;
-import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -134,7 +128,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
                 String time= edittext_time.getText().toString();
                 String location = sample_location.getText().toString();
                 ScheduleCreatePresenter.get(name,detail,category,repeat,week,date,time,location);
-
+                finish();
             }
         });
 

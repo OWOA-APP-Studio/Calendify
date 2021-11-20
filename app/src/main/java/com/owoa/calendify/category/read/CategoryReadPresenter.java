@@ -15,7 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.owoa.calendify.R;
-import com.owoa.calendify.category.CategoryAdapter;
+import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,10 +27,12 @@ import java.util.Map;
 import static com.owoa.calendify.category.read.CategoryReadData.REQUEST_READ_CATEGORY_URL;
 
 public class CategoryReadPresenter {
-    String categoryArray[];
+    String categories[];
     String uid;
     Activity activity;
     RecyclerView recyclerView;
+    CategoryReadAdapter adapter;
+    JSONObject jsonObject;
 
     public CategoryReadPresenter(String uid, Activity activity) {
         this.uid = uid;
@@ -42,14 +44,15 @@ public class CategoryReadPresenter {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
+                    Log.d("CATEGORY-LOG",response);
+                    jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("카테고리");
 
-                    initializeUserCategory(jsonObject);
+                    initializeUserCategory(0);
 
-                    categoryArray = new String[jsonArray.length()];
+                    categories = new String[jsonArray.length()];
                     for(int i = 0; i < jsonArray.length(); i++) {
-                        categoryArray[i] = jsonArray.get(i).toString();
+                        categories[i] = jsonArray.get(i).toString();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -77,20 +80,25 @@ public class CategoryReadPresenter {
         queue.add(categoryReadRequest);
     }
 
-    private void initializeUserCategory (JSONObject jsonObject) {
+    public void initializeUserCategory (int index) {
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("카테고리");
-            categoryArray = new String[jsonArray.length()+1];
+            categories = new String[jsonArray.length()+1];
             for(int i = 0; i < jsonArray.length(); i++) {
                 JSONObject categoryData = jsonArray.getJSONObject(i);
-                categoryArray[i] = categoryData.getString("ctg_nm");
+                categories[i] = categoryData.getString("ctg_nm");
             }
-            categoryArray[jsonArray.length()] = "+";
-        } catch (JSONException e) {
+            categories[jsonArray.length()] = "+";
 
+            ScheduleReadActivity scheduleReadActivity = (ScheduleReadActivity) activity;
+            scheduleReadActivity.setCategories(categories);
+            scheduleReadActivity.loadSchedule(index);
+        } catch (JSONException e) {
+            e.printStackTrace();
         } finally {
+            adapter = new CategoryReadAdapter(categories, activity, this);
             recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-            recyclerView.setAdapter(new CategoryAdapter(categoryArray, activity));
+            recyclerView.setAdapter(adapter);
         }
     }
 

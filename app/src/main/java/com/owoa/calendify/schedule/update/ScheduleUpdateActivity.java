@@ -1,4 +1,4 @@
-package com.owoa.calendify.schedule.Update;
+package com.owoa.calendify.schedule.update;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -19,10 +19,7 @@ import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.owoa.calendify.R;
-import com.owoa.calendify.loading.LoadingPresenter;
-import com.owoa.calendify.schedule.Contract;
-import com.owoa.calendify.schedule.ScheduleCreateActivity;
-import com.owoa.calendify.schedule.ScheduleCreatePresenter;
+import com.owoa.calendify.schedule.create.Contract;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

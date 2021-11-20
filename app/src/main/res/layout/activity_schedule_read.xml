@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#5559b4"
     android:id="@+id/drawer_layout"
     tools:context=".schedule.read.ScheduleReadActivity">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -79,14 +78,16 @@
                 android:layout_height="match_parent"
                 android:fillViewport="true">
                 <ListView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/schedule_list"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
                     android:background="#DCDCDC"/>
             </ScrollView>
         </LinearLayout>
 
         <ImageView
-
             android:id="@+id/create_schedule_button"
             android:src="@drawable/button"
             android:layout_width="50dp"
@@ -95,6 +96,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp" />
 
+<!--            android:layout_height="match_parent"-->
+<!--            android:fillViewport="true">-->
     </LinearLayout>
 
     <include layout="@layout/activity_schedule_navigation"/>

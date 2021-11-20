@@ -1,4 +1,4 @@
-package com.owoa.calendify.schedule;
+package com.owoa.calendify.schedule.create;
 
 import android.app.TimePickerDialog;
 import android.widget.TimePicker;

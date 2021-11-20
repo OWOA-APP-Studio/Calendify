@@ -1,18 +1,6 @@
-package com.owoa.calendify.schedule;
-
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
-import android.widget.DatePicker;
-import android.widget.TextView;
-import android.widget.TimePicker;
+package com.owoa.calendify.schedule.create;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.owoa.calendify.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ScheduleCreatePresenter extends AppCompatActivity implements Contract.Presenter {
     Contract.View view;

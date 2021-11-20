@@ -1,6 +1,4 @@
-package com.owoa.calendify.schedule;
-
-import com.owoa.calendify.schedule.Update.ScheduleUpdateData;
+package com.owoa.calendify.schedule.create;
 
 public class ScheduleCreateModel {
     Contract.Presenter presenter;
@@ -29,10 +27,4 @@ public class ScheduleCreateModel {
         schedule_time = time;
         schedule_location = location;
     }
-
-
-
-
-
-
 }
