@@ -24,18 +24,17 @@
         </TextView>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/button"
             android:id="@+id/genter_icon"
+            android:layout_width="37dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="80dp"
-            android:layout_marginLeft="50dp">
-        </ImageView>
+            android:src="@drawable/user"></ImageView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이아람 님"
+            android:text="사용자 님"
             android:textSize="26dp"
             android:textColor="#ffffff"
             android:layout_marginTop="80dp"
@@ -56,80 +55,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#80ffffff"
-            android:layout_marginTop="270dp">
-        </LinearLayout>
+            android:layout_marginTop="270dp"
+            android:background="#80ffffff"></LinearLayout>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/button"
+
+            android:layout_width="23dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="298dp"
-            android:layout_marginLeft="20dp">
-        </ImageView>
+            android:src="@drawable/friend_list"></ImageView>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="운동이력"
-            android:textColor="#ffffff"
             android:id="@+id/nav_ex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="44dp"
             android:layout_marginTop="298dp"
-            android:layout_marginLeft="44dp"
-            android:onClick="OnClick">
-        </TextView>
+            android:onClick="OnClick"
+            android:text="친구목록"
+            android:textColor="#ffffff"></TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#80ffffff"
-            android:layout_marginTop="340dp">
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/button"
-            android:layout_marginTop="368dp"
-            android:layout_marginLeft="20dp">
-        </ImageView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="회원정보수정"
-            android:textColor="#ffffff"
-            android:id="@+id/nav_info"
-            android:layout_marginTop="368dp"
-            android:layout_marginLeft="44dp"
-            android:onClick="OnClick">
-        </TextView>
+            android:layout_marginTop="340dp"
+            android:background="#80ffffff"></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#80ffffff"
-            android:layout_marginTop="410dp">
-        </LinearLayout>
+            android:layout_marginTop="410dp"
+            android:background="#80ffffff"></LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/button"
-            android:layout_marginTop="438dp"
-            android:layout_marginLeft="20dp">
-        </ImageView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="도움말"
-            android:textColor="#ffffff"
-            android:id="@+id/nav_help"
-            android:layout_marginTop="438dp"
-            android:layout_marginLeft="44dp"
-            android:onClick="OnClick">
-        </TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -139,16 +98,15 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/nav_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그아웃"
-            android:textSize="15dp"
-            android:textColor="#ffffff"
-            android:id="@+id/nav_logout"
-            android:layout_marginTop="550dp"
             android:layout_centerHorizontal="true"
-            android:onClick="OnClick">
-        </TextView>
+            android:layout_marginTop="550dp"
+            android:onClick="OnClick"
+            android:text="로그아웃"
+            android:textColor="#ffffff"
+            android:textSize="15dp"></TextView>
     </RelativeLayout>
 
 </LinearLayout>
