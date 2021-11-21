@@ -4,212 +4,209 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".schedule.ScheduleCreateActivity">
+    tools:context=".schedule.create.ScheduleCreateActivity">
 
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="258dp"
-        android:layout_height="48dp"
-
-        android:entries="@array/test"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <EditText
+        android:id="@+id/schedule_create_title"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="제목"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:selectAllOnFocus="true"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.307"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578" />
+        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
 
 
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="70dp"
-        android:layout_height="27dp"
-        android:text="@string/결과"
-
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/schedule_create_start_datetime"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule_create_title">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/text_start_dateTime"
+            android:textSize="20sp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.124"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.223" />
+
+        <TextView
+            android:id="@+id/schedule_create_start_date"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:gravity="right|center"
+            android:paddingRight="5dp"
+            android:text="@string/editText_date"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/schedule_create_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/edittext_time"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/schedule_create_end_datetime"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="@string/title"
-        android:textSize="36sp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_create_start_datetime">
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/text_end_dateTime"
+            android:textSize="20sp"
 
-    <TextView
-        android:id="@+id/text.Name"
-        android:layout_width="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.124"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.223" />
+
+        <TextView
+            android:id="@+id/schedule_create_end_date"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:gravity="right|center"
+            android:paddingRight="5dp"
+            android:text="@string/editText_date"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/schedule_create_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/edittext_time"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="@string/text_name"
-        android:textSize="18sp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_create_description">
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.104" />
+        <RadioGroup
+            android:id="@+id/schedule_create_cycle_radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.713">
 
-    <TextView
-        android:id="@+id/text_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_location"
-        android:textSize="18sp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.782" />
+            <RadioButton
+                android:id="@+id/schedule_create_radio_day"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:text="@string/radiobutton_day"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
-    <TextView
-        android:id="@+id/text.Time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_time"
-        android:textSize="18sp"
+            <RadioButton
+                android:id="@+id/schedule_create_radio_week"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/radiobutton_week" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.223" />
+        </RadioGroup>
 
-    <TextView
-        android:id="@+id/text.Detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_detail"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" />
+            <Spinner
+                android:id="@+id/schedule_create_category_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
 
-    <TextView
-        android:id="@+id/text.category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/schedule_create_description" />
 
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.524" />
+            <EditText
+                android:id="@+id/schedule_create_cycle_repeat_times"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:hint="반복 횟수"
+                android:gravity="center"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:selectAllOnFocus="true"
+                android:visibility="invisible"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 
     <EditText
-        android:id="@+id/sample_Name"
-        android:layout_width="wrap_content"
+        android:id="@+id/schedule_create_location"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="일정명입력"
-        android:selectAllOnFocus="true"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="@string/edittext_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.233"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143"
-        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
-
-    <EditText
-        android:id="@+id/sample_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="장소 입력"
-        android:selectAllOnFocus="true"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-
-        android:text="@string/edittext_location"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.233"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.844"
-        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
-
-    <TextView
-        android:id="@+id/sample_time"
-        android:layout_width="135dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:minHeight="48dp"
-
-        android:text="@string/edittext_time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.335"
-        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
-
-    <TextView
-        android:id="@+id/sample_date"
-        android:layout_width="135dp"
-        android:layout_height="41dp"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:minHeight="48dp"
-
-        android:text="@string/edittext_date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.273"
-        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
-
-    <EditText
-        android:id="@+id/sample.Detail"
-        android:layout_width="228dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:hint="상세내용 입력"
-        android:selectAllOnFocus="true"
+        android:hint="장소"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="48dp"
 
-        android:text="@string/edittext_detail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.256"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.458"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
+
+    <EditText
+        android:id="@+id/schedule_create_description"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="내용"
+        android:inputType="textMultiLine"
+        android:lines="3"
+        android:minHeight="48dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_create_end_datetime" />
 
     <Button
         android:id="@+id/add_button"
@@ -223,74 +220,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
-    <Button
-        android:id="@+id/date_button"
-        android:layout_width="99dp"
-        android:layout_height="48dp"
-        android:text="@string/button_date"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.266" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule_create_location">
 
-    <Button
-        android:id="@+id/time_button"
-        android:layout_width="99dp"
-        android:layout_height="48dp"
-        android:text="@string/button_time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.336" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="240dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="124dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.713">
-
-        <RadioButton
-            android:id="@+id/radioButton_day"
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/schedule_create_alert_checkBox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/radiobutton_day"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+            android:layout_marginRight="150dp"
+            android:text="알림" />
 
-        <RadioButton
-            android:id="@+id/radioButton_week"
+        <Spinner
+            android:id="@+id/schedule_create_alert_list_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/radiobutton_week" />
+            android:layout_height="48dp"
+            android:layout_gravity="right"
+            android:visibility="invisible"
+            tools:visibility="visible"
+            android:entries="@array/alert" />
 
-    </RadioGroup>
-
-    <EditText
-        android:id="@+id/tv_week"
-        android:layout_width="106dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:hint="몇주 입력"
-        android:selectAllOnFocus="true"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-
-        android:text="@string/text_week"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.723"
-        tools:ignore="LabelFor,DuplicateSpeakableTextCheck" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,16 @@
 package com.owoa.calendify.intro;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -21,6 +21,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.owoa.calendify.R;
 import com.owoa.calendify.account.UserPresenter;
+import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 import com.owoa.calendify.sign.in.SignInActivity;
 import com.owoa.calendify.sign.up.SignUpActivity;
 
@@ -36,10 +37,10 @@ import static com.owoa.calendify.intro.IntroData.REQUEST_SOCIAL_SIGN_UP_URL;
 
 public class IntroPresenter {
     private static final int RC_SIGN_IN = 9001;
-    IntroActivity activity;
+    Activity activity;
     UserPresenter userPresenter;
 
-    public void setActivity(IntroActivity activity) {
+    public void setActivity(Activity activity) {
         this.activity = activity;
     }
 
@@ -56,7 +57,7 @@ public class IntroPresenter {
         activity.startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    public void socialSignIn(int requestCode, int resultCode, @Nullable Intent data) {
+    public void socialSignIn(int requestCode, @Nullable Intent data) {
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
@@ -74,39 +75,36 @@ public class IntroPresenter {
 
     private void updateUI(GoogleSignInAccount account) {
         userPresenter = new UserPresenter(account);
-        checkAccountInfo();
+        checkAccountInfo(account.getId());
     }
 
-    public void checkAccountInfo() {
-        StringRequest signInRequest = new StringRequest(Request.Method.POST, REQUEST_SOCIAL_SIGN_IN_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String success = jsonObject.getString("success");
+    public void checkAccountInfo(String id) {
 
-                    if(success.equals("1")) {
-                        Toast.makeText(activity, "계정을 생성했습니다.", Toast.LENGTH_SHORT).show();
-                        activity.finish();
-                    }
-                    else {
-                        createSocialAccount();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        String uid = id;
+        StringRequest signInRequest = new StringRequest(Request.Method.POST, REQUEST_SOCIAL_SIGN_IN_URL, response -> {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                String success = jsonObject.getString("success");
+
+                if(success.equals("1")) {
+                    Toast.makeText(activity, "자동 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(activity, ScheduleReadActivity.class);
+                    intent.putExtra(activity.getString(R.string.uid), uid);
+                    activity.startActivity(intent);
+                    activity.finish();
                 }
+                else {
+                    createSocialAccount();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }, new Response.ErrorListener() {
+        }, error ->
+                Toast.makeText(activity.getApplicationContext(), "서버 통신 실패." + error.getMessage(), Toast.LENGTH_SHORT).show()) {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(activity.getApplicationContext(), "서버 통신 실패." + error.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("id", userPresenter.getInfoData().getId());
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", id);
                 return params;
             }
         };
@@ -115,32 +113,24 @@ public class IntroPresenter {
     }
 
     public void createSocialAccount() {
-        StringRequest signUpRequest = new StringRequest(Request.Method.POST, REQUEST_SOCIAL_SIGN_UP_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String success = jsonObject.getString("success");
+        StringRequest signUpRequest = new StringRequest(Request.Method.POST, REQUEST_SOCIAL_SIGN_UP_URL, response -> {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                String success = jsonObject.getString("success");
 
-                    if(success.equals("1")) {
-                        Toast.makeText(activity, "계정을 생성했습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(activity, "계정 생성에 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if(success.equals("1")) {
+                    Toast.makeText(activity, "계정을 생성했습니다.", Toast.LENGTH_SHORT).show();
                 }
+                else {
+                    Toast.makeText(activity, "계정 생성에 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }, new Response.ErrorListener() {
+        }, error -> Toast.makeText(activity.getApplicationContext(), "서버 통신 실패." + error.getMessage(), Toast.LENGTH_SHORT).show()) {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(activity.getApplicationContext(), "서버 통신 실패." + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
                 params.put("id", userPresenter.getInfoData().getId());
                 params.put("email", userPresenter.getInfoData().getEmail());
                 params.put("nickname", userPresenter.getInfoData().getNickname());
