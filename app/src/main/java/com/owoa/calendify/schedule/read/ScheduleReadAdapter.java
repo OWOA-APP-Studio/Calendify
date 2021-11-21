@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.owoa.calendify.R;
 import com.owoa.calendify.schedule.create.ScheduleModel;
+import com.owoa.calendify.schedule.delete.ScheduleDeletePresenter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,6 +77,17 @@ public class ScheduleReadAdapter extends BaseAdapter {
                             public void onClick(DialogInterface dialog, int which) {
                                 ScheduleModel model = scheduleModels.get(position);
                                 Toast.makeText(activity, select[which] + " : " + model.getScheduleId(), Toast.LENGTH_LONG).show();
+
+                                switch (which) {
+                                    case 0:
+                                        Toast.makeText(activity, "일정 수정 기능입니다.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 1:
+                                        Toast.makeText(activity, "일정을 삭제했습니다.", Toast.LENGTH_SHORT).show();
+                                        ScheduleDeletePresenter presenter = new ScheduleDeletePresenter(activity, activity.getUid(), model.getScheduleId());
+                                        presenter.deleteSchedule();
+                                }
+
                             }
                         });
                 oDialog.show();
