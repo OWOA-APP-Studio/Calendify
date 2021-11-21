@@ -20,6 +20,7 @@ import android.widget.ListView;
 import com.owoa.calendify.schedule.create.ScheduleCreateActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ScheduleReadActivity extends AppCompatActivity {
     ScheduleReadActivity activity;
@@ -30,8 +31,6 @@ public class ScheduleReadActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private View drawerView;
 
-
-
     public String getUid() {
         return uid;
     }
@@ -41,8 +40,8 @@ public class ScheduleReadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_read);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerView = (View) findViewById(R.id.drawerView);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerView = findViewById(R.id.drawerView);
         drawerLayout.setDrawerListener(listener);
 
         Intent intent = getIntent();
@@ -59,9 +58,7 @@ public class ScheduleReadActivity extends AppCompatActivity {
         ImageView scheduleCreateButton = findViewById(R.id.create_schedule_button);
         scheduleCreateButton.setOnClickListener(view -> {
             ArrayList categoryList = new ArrayList<>();
-            for(int i = 0; i < categories.length-1; i++) {
-                categoryList.add(categories[i]);
-            }
+            categoryList.addAll(Arrays.asList(categories).subList(0, categories.length - 1));
 
             Intent intent1 = new Intent(ScheduleReadActivity.this, ScheduleCreateActivity.class);
             intent1.putExtra("categories", categoryList);
@@ -69,14 +66,8 @@ public class ScheduleReadActivity extends AppCompatActivity {
             startActivity(intent1);
         });
 
-        ImageView  scheduleNavigationButton = (ImageView) findViewById(R.id.create_navigation_button);
-        scheduleNavigationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(drawerView);
-            }
-
-        });
+        ImageView  scheduleNavigationButton = findViewById(R.id.create_navigation_button);
+        scheduleNavigationButton.setOnClickListener(view -> drawerLayout.openDrawer(drawerView));
     }
 
     public void setCategories(String[] categories) {

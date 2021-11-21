@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,11 +21,23 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.owoa.calendify.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.owoa.calendify.schedule.create.ScheduleCreateModel.REQUEST_SCHEDULE_CREATE_URL;
 
 public class ScheduleCreateActivity extends AppCompatActivity implements Contract.View {
     SimpleDateFormat mFormat_year = new SimpleDateFormat("yyyy");
@@ -62,15 +75,13 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
     private Contract.Presenter ScheduleCreatePresenter;
 
     private Button add_button;
+    private CheckBox alarmCheck;
 
     private String uid;
     private ArrayList categories;
 
-
-
-
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_create);
 
@@ -98,6 +109,8 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
         repeatCycleRadioGroup = (RadioGroup) findViewById(R.id.schedule_create_cycle_radioGroup);
         repeat_times = (TextView) findViewById(R.id.schedule_create_cycle_repeat_times);
         repeatCycleRadioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
+
+        alarmCheck = findViewById(R.id.schedule_create_alarm_checkBox);
 
         initialize();
     }
@@ -141,7 +154,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
             @Override
             public void onClick(View view) {
                 // TODO : click event
-                String name = title.getText().toString();
+                String title = ScheduleCreateActivity.this.title.getText().toString();
                 String detail = description.getText().toString();
                 String category = category_spinner.getSelectedItem().toString();
                 String date = start_date.getText().toString();
@@ -149,7 +162,9 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
                 String locations = location.getText().toString();
 
                 String repeat = Character.toString(repeatType);
-                ScheduleCreatePresenter.get(name,detail,category,repeat,week,date,time,locations);
+                ScheduleCreatePresenter.get(title,detail,category,repeat,week,date,time,locations);
+
+                createSchedule();
                 //finish();
             }
         });
@@ -177,7 +192,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 h = hourOfDay;
                 mi = minute;
-                time.setText(String.format("%d시 %d분", h,mi));
+                time.setText(String.format("%d:%d:00", h,mi));
             }
         }, hour, minute, true);
 
@@ -187,7 +202,7 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
                 y = year;
                 m = month+1;
                 d = dayOfMonth;
-                date.setText(String.format("%d년 %d월 %d일", y,m,d));
+                date.setText(String.format("%d-%d-%d", y,m,d));
 
                 timePickerDialog.setMessage("시간");
                 timePickerDialog.show();
@@ -202,17 +217,53 @@ public class ScheduleCreateActivity extends AppCompatActivity implements Contrac
     // Contract //
     @Override
     public void showResult(String name, String detail, String category, String repeat ,int week,String date,String time, String location) {
-        Toast.makeText(getApplicationContext(),("일정 추가 완료" + "\n"
-                +"일정명: " + name + "\n"
-                +"상세내용: " + detail + "\n"
-                +"카테고리 명: " + category + "\n"
-                +"반복종류: "+ repeat + " " + week +" 주"+ "\n"
-                +"날짜: " + date + "\n"
-                +"시간: " + time + "\n"
-                +"장소: " + location),Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),("일정 추가 완료" + "\n"
+//                +"일정명: " + name + "\n"
+//                +"상세내용: " + detail + "\n"
+//                +"카테고리 명: " + category + "\n"
+//                +"반복종류: "+ repeat + " " + week +" 주"+ "\n"
+//                +"날짜: " + date + "\n"
+//                +"시간: " + time + "\n"
+//                +"장소: " + location),Toast.LENGTH_LONG).show();
     }
 
     public void createSchedule() {
-
+        StringRequest createCategoryRequest = new StringRequest(Request.Method.POST, REQUEST_SCHEDULE_CREATE_URL, response -> {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                String result = jsonObject.getString("success");
+                switch (result.charAt(0)) {
+                    case 'S' :
+                        Toast.makeText(this, "일정을 생성했습니다.", Toast.LENGTH_SHORT).show();
+                        finish();
+                        break;
+                    case 'F' :
+                    default:
+                        Toast.makeText(this, "일정을 다시 확인하고 추가해주세요.", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, error -> Toast.makeText(getApplicationContext(), "서버가 응답하지 않습니다." + error.getMessage(), Toast.LENGTH_SHORT).show()) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", uid);
+                params.put("sch_ttl", title.getText().toString());
+                params.put("sch_dsc", description.getText().toString());
+                params.put("sch_ctg", category_spinner.getSelectedItem().toString());
+                params.put("sch_lct", location.getText().toString());
+                params.put("sch_stm", start_time.getText().toString());
+                params.put("sch_etm", end_time.getText().toString());
+                params.put("sch_sdy", start_date.getText().toString());
+                params.put("sch_edy", end_date.getText().toString());
+                params.put("sch_slc_alr", String.valueOf(alarmCheck.isChecked() ? 1 : -1));
+                params.put("sch_slc_typ", String.valueOf(repeatType));
+                return params;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(createCategoryRequest);
     }
 }

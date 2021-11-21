@@ -1,6 +1,9 @@
 package com.owoa.calendify.schedule.create;
 
-public class ScheduleCreateModel {
+import com.owoa.calendify.server.ServerData;
+
+public class ScheduleCreateModel extends ServerData {
+    final static String REQUEST_SCHEDULE_CREATE_URL = URL + "schedule/create.php";
     Contract.Presenter presenter;
 
     public ScheduleCreateModel(Contract.Presenter presenter){
