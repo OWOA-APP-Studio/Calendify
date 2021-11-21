@@ -1,11 +1,14 @@
 package com.owoa.calendify.schedule.read;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,7 +36,7 @@ public class ScheduleReadAdapter extends BaseAdapter {
         this.activity = (ScheduleReadActivity) activity;
         this.layoutInflater = LayoutInflater.from(activity.getApplicationContext());
 
-        for(int i = 0; i < schedules.length(); i++) {
+        for (int i = 0; i < schedules.length(); i++) {
             try {
                 scheduleModels.add(new ScheduleModel(schedules.getJSONObject(i)));
             } catch (JSONException e) {
@@ -58,6 +61,29 @@ public class ScheduleReadAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.item_schedule, null);
+
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                final CharSequence[] select = {"일정 수정", "일정 삭제"};
+
+                AlertDialog.Builder oDialog = new AlertDialog.Builder(activity,
+                        android.R.style.Theme_DeviceDefault_Light_Dialog_Alert);
+
+                oDialog.setTitle("일정 관리");
+                oDialog.setItems(select, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ScheduleModel model = scheduleModels.get(position);
+                                Toast.makeText(activity, select[which] + " : " + model.getScheduleId(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                oDialog.show();
+                return false;
+            }
+        });
+
+
         TextView title = view.findViewById(R.id.schedule_name);
         TextView description = view.findViewById(R.id.schedule_item_description);
         TextView startDay = view.findViewById(R.id.schedule_item_today);
@@ -90,13 +116,12 @@ public class ScheduleReadAdapter extends BaseAdapter {
                 }
 
                 if (position > 0) {
-                    ScheduleModel forwardSchedule = scheduleModels.get(position-1);
-                    if(model.getStartDay().split("-")[2].equals(forwardSchedule.getStartDay().split("-")[2])) {
+                    ScheduleModel forwardSchedule = scheduleModels.get(position - 1);
+                    if (model.getStartDay().split("-")[2].equals(forwardSchedule.getStartDay().split("-")[2])) {
                         startDay.setVisibility(View.INVISIBLE);
                         startDay.getLayoutParams().width = 80;
                         startDay.getLayoutParams().height = 80;
-                    }
-                    else {
+                    } else {
                         LinearLayout layout1 = view.findViewById(R.id.schedule_item_split1);
                         layout1.setBackground(view.getContext().getDrawable(R.color.black));
                         LinearLayout layout2 = view.findViewById(R.id.schedule_item_split2);
@@ -107,7 +132,7 @@ public class ScheduleReadAdapter extends BaseAdapter {
                 startDay.setText(dayFormat.format(startDayDate));
                 startTime.setText(stmFormat.format(startTimeDate));
                 endTime.setText(stmFormat.format(endTimeDate));
-                if(! model.getLocation().equals("null"))
+                if (!model.getLocation().equals("null"))
                     location.setText(model.getLocation());
 
                 title.setText(model.getTitle());
@@ -118,6 +143,7 @@ public class ScheduleReadAdapter extends BaseAdapter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         return view;
     }
 
@@ -139,9 +165,8 @@ public class ScheduleReadAdapter extends BaseAdapter {
             long timeLength = (startTimeDate.getTime() - endTimeDate.getTime()) / 1000L;
             long currentTime = (startTimeDate.getTime() - nowTimeDate.getTime()) / 1000L;
 
-            progress = (int)((double)currentTime/timeLength * 100);
-        }
-        catch (ParseException e) {
+            progress = (int) ((double) currentTime / timeLength * 100);
+        } catch (ParseException e) {
             Log.d("setProgress", e.getMessage());
             e.printStackTrace();
         }
