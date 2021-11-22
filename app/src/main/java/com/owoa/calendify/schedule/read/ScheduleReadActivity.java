@@ -12,11 +12,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 
+import com.google.android.material.navigation.NavigationView;
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.read.CategoryReadPresenter;
 
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.owoa.calendify.friend.read.FriendReadActivity;
 import com.owoa.calendify.schedule.create.ScheduleCreateActivity;
 
 import java.util.ArrayList;
@@ -66,6 +69,13 @@ public class ScheduleReadActivity extends AppCompatActivity {
             startActivity(intent1);
         });
 
+        TextView friendListButton = findViewById(R.id.nav_ex);
+        friendListButton.setOnClickListener( view -> {
+            Intent intent2 = new Intent(ScheduleReadActivity.this, FriendReadActivity.class);
+            startActivity(intent2);
+        });
+
+
         ImageView  scheduleNavigationButton = findViewById(R.id.create_navigation_button);
         scheduleNavigationButton.setOnClickListener(view -> drawerLayout.openDrawer(drawerView));
     }
@@ -97,5 +107,8 @@ public class ScheduleReadActivity extends AppCompatActivity {
         public void onDrawerStateChanged(int newState) {
 
         }
+
     };
+
+
 }
