@@ -8,8 +8,7 @@
     android:orientation="vertical"
     android:id="@+id/drawer_layout"
     tools:context=".schedule.read.ScheduleReadActivity">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -37,11 +36,11 @@
 
             <ImageView
                 android:id="@+id/create_navigation_button"
-                android:src="@drawable/button"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="5dp"
-                android:gravity="right" />
+                android:gravity="right"
+                android:src="@drawable/menu" />
 
         </LinearLayout>
 
@@ -89,7 +88,7 @@
 
         <ImageView
             android:id="@+id/create_schedule_button"
-            android:src="@drawable/button"
+            android:src="@drawable/add_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="right"
