@@ -15,10 +15,7 @@ import com.owoa.calendify.R;
 import com.owoa.calendify.category.read.CategoryReadPresenter;
 import com.owoa.calendify.friend.create.FriendCreateActivity;
 
-//class Code {
-//    public static int requestCode = 100;
-//    public static int resultCode = 1;
-//}
+
 public class FriendReadActivity extends AppCompatActivity {
     TextView txtResult;
     ListView friendList;
@@ -29,13 +26,15 @@ public class FriendReadActivity extends AppCompatActivity {
     Activity activity;
 
     RecyclerView friendCategoryView;
+    TextView friend_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_list);
-        txtResult = findViewById(R.id.txtResult);
+        txtResult = findViewById(R.id.friend_ID);
         friendList = findViewById(R.id.friend_list);
+        friend_ID = (TextView)findViewById(R.id.friend_ID);
 
         Intent intent = getIntent();
         uid = intent.getStringExtra(getString(R.string.uid));
@@ -55,17 +54,5 @@ public class FriendReadActivity extends AppCompatActivity {
         categoryPresenter.setRecyclerView(friendCategoryView);
         categoryPresenter.loadFriendCategory();
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                //데이터 받기
-                String result = data.getStringExtra("name");
-                txtResult.setText(result);
-            }
-        }
-    }
-
+    //friend_ID.setText(result);
 }

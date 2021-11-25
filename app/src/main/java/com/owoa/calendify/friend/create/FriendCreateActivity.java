@@ -4,18 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,7 +19,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.owoa.calendify.R;
 
-import com.owoa.calendify.friend.read.FriendReadActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,8 +33,9 @@ import static com.owoa.calendify.friend.create.FriendCreateData.REQUEST_ADD_FRIE
 //    public static int resultCode = 1;
 //}
 public class FriendCreateActivity extends Activity {
-    EditText txtText;
+    FriendCreatePresenter presenter;
     Button confirmButton;
+    EditText targetId;
 
     String uid;
     String targetUid;
@@ -48,21 +43,24 @@ public class FriendCreateActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //타이틀바 없애기
+        presenter = new FriendCreatePresenter(this);
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_friend_add);
         confirmButton = findViewById(R.id.friend_add_confirm);
 
         Intent intent = getIntent();
+        targetId = findViewById(R.id.friend_ID);
         uid = intent.getStringExtra(getString(R.string.uid));
+
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //데이터 전달하기
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("name", txtText.getText().toString());
-                targetUid = txtText.getText().toString();
+                resultIntent.putExtra("name", targetId.getText().toString());
+                targetUid = targetId.getText().toString();
                 setResult(RESULT_OK, resultIntent);
 
                 requestAddFriend();
@@ -71,9 +69,6 @@ public class FriendCreateActivity extends Activity {
                 finish();
             }
         });
-
-        //UI 객체생성
-        txtText = (EditText)findViewById(R.id.txtText);
 
     }
 
@@ -86,14 +81,14 @@ public class FriendCreateActivity extends Activity {
                     JSONObject jsonObject = new JSONObject(response);
                     String result = jsonObject.getString("success");
                     switch (result.charAt(0)) {
-                        case 'S' :
+                        case 'S':
                             Toast.makeText(getApplicationContext(), "친구 추가를 신청했습니다.", Toast.LENGTH_SHORT).show();
                             finish();
                             break;
-                        case 'D' :
+                        case 'D':
                             Toast.makeText(getApplicationContext(), "이미 친구 신청을 보냈습니다.", Toast.LENGTH_SHORT).show();
                             break;
-                        case 'F' :
+                        case 'F':
                         default:
                             Toast.makeText(getApplicationContext(), "상대방을 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
                             Log.d("FRC-ERR", response);
@@ -122,20 +117,22 @@ public class FriendCreateActivity extends Activity {
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         queue.add(requestAddFriend);
+        //확인 버튼 클릭
+
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        //바깥레이어 클릭시 안닫히게
-        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
+    public boolean onTouchEvent (MotionEvent event){
+
+        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
             return false;
         }
         return true;
     }
 
     @Override
-    public void onBackPressed() {
-        //안드로이드 백버튼 막기
+    public void onBackPressed () {
+
         return;
     }
 }
