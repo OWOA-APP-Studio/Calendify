@@ -13,18 +13,16 @@ import com.owoa.calendify.R;
 import com.owoa.calendify.friend.create.FriendCreateActivity;
 import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
-//class Code {
-//    public static int requestCode = 100;
-//    public static int resultCode = 1;
-//}
+
 public class FriendReadActivity extends AppCompatActivity {
-    TextView txtResult;
+    TextView friend_ID;
+    FriendCreateActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_list);
-        txtResult = (TextView)findViewById(R.id.txtResult);
+        friend_ID = (TextView)findViewById(R.id.friend_ID);
 
         ImageView friendListButton = findViewById(R.id.friend_add_button);
         friendListButton.setOnClickListener( view -> {
@@ -33,16 +31,10 @@ public class FriendReadActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                //데이터 받기
-                String result = data.getStringExtra("name");
-                txtResult.setText(result);
-            }
-        }
-    }
+
+    //friend_ID.setText(result);
+
+
+
 
 }
