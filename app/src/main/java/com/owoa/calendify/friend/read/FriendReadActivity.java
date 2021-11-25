@@ -1,17 +1,19 @@
 package com.owoa.calendify.friend.read;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.owoa.calendify.R;
+import com.owoa.calendify.category.read.CategoryReadPresenter;
 import com.owoa.calendify.friend.create.FriendCreateActivity;
-import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
 //class Code {
 //    public static int requestCode = 100;
@@ -19,18 +21,39 @@ import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 //}
 public class FriendReadActivity extends AppCompatActivity {
     TextView txtResult;
+    ListView friendList;
+
+    CategoryReadPresenter categoryPresenter;
+
+    String uid;
+    Activity activity;
+
+    RecyclerView friendCategoryView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_list);
-        txtResult = (TextView)findViewById(R.id.txtResult);
+        txtResult = findViewById(R.id.txtResult);
+        friendList = findViewById(R.id.friend_list);
 
-        ImageView friendListButton = findViewById(R.id.friend_add_button);
-        friendListButton.setOnClickListener( view -> {
-            Intent intent = new Intent(FriendReadActivity.this, FriendCreateActivity.class);
-            startActivityForResult(intent,1);
+        Intent intent = getIntent();
+        uid = intent.getStringExtra(getString(R.string.uid));
+
+        friendCategoryView = findViewById(R.id.friend_category_list);
+
+        ImageView friendAddButton = findViewById(R.id.friend_add_button);
+        friendAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(FriendReadActivity.this, FriendCreateActivity.class);
+                intent2.putExtra(getString(R.string.uid), uid);
+                startActivityForResult(intent2,1);
+            }
         });
+        categoryPresenter = new CategoryReadPresenter(uid, activity);
+        categoryPresenter.setRecyclerView(friendCategoryView);
+        categoryPresenter.loadFriendCategory();
     }
 
     @Override

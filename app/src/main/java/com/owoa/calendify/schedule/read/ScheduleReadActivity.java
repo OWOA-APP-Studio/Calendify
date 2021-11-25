@@ -72,9 +72,9 @@ public class ScheduleReadActivity extends AppCompatActivity {
         TextView friendListButton = findViewById(R.id.nav_ex);
         friendListButton.setOnClickListener( view -> {
             Intent intent2 = new Intent(ScheduleReadActivity.this, FriendReadActivity.class);
+            intent2.putExtra(getString(R.string.uid), uid);
             startActivity(intent2);
         });
-
 
         ImageView  scheduleNavigationButton = findViewById(R.id.create_navigation_button);
         scheduleNavigationButton.setOnClickListener(view -> drawerLayout.openDrawer(drawerView));

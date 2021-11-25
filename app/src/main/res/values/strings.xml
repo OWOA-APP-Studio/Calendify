@@ -20,6 +20,7 @@
 
 
     <string name="button_add">추 가</string>
+    <string name="button_update">수 정</string>
     <string name="button_date">날짜 추가</string>
     <string name="button_time">시간 추가</string>
 

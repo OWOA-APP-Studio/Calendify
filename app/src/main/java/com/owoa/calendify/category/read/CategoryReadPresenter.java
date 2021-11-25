@@ -80,6 +80,10 @@ public class CategoryReadPresenter {
         queue.add(categoryReadRequest);
     }
 
+    public void loadFriendCategory() {
+
+    }
+
     public void initializeUserCategory (int index) {
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("카테고리");
