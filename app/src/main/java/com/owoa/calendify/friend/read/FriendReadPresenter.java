@@ -52,7 +52,7 @@ public class FriendReadPresenter {
                     Log.d("FRIEND-LOG",response);
                     jsonObject = new JSONObject(response);
                     friends = jsonObject.getJSONArray("친구목록");
-                    adapter = new FriendReadAdapter(activity, friends);
+                    adapter = new FriendReadAdapter(activity, friends, uid);
                     friendList.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
