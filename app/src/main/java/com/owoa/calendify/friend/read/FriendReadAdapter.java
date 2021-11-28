@@ -1,18 +1,25 @@
 package com.owoa.calendify.friend.read;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.read.CategoryReadPresenter;
 import com.owoa.calendify.friend.FriendModel;
+import com.owoa.calendify.schedule.ScheduleModel;
+import com.owoa.calendify.schedule.delete.ScheduleDeletePresenter;
+import com.owoa.calendify.schedule.update.ScheduleUpdateActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,6 +72,38 @@ public class FriendReadAdapter extends BaseAdapter {
 
         loadFriendCategoryList(position);
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity, "친구가 공유한 일정을 보여줍니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                final CharSequence[] select = {"공유 카테고리 수정", "친구 삭제"};
+
+                AlertDialog.Builder oDialog = new AlertDialog.Builder(activity, android.R.style.Theme_DeviceDefault_Light_Dialog_Alert);
+
+                oDialog.setTitle("일정 관리");
+                oDialog.setItems(select, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                Toast.makeText(activity, "공유 카테고리를 수정합니다.", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 1:
+                                Toast.makeText(activity, "친구를 삭제합니다.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+                oDialog.show();
+                return false;
+            }
+        });
         return view;
     }
 

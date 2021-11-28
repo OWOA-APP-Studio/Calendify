@@ -23,7 +23,7 @@ public class CategoryReadView extends FrameLayout {
         LayoutInflater.from(context).inflate(R.layout.item_category, this);
     }
 
-    public void displayItem(String text, Activity activity, int position, CategoryReadPresenter presenter) {
+    public void displayItem(String text, Activity activity, int position, CategoryReadPresenter presenter, boolean isClickable) {
         ((TextView)findViewById(R.id.categoryName)).setText(text);
 
         if(text.charAt(0) == '+') {
@@ -40,10 +40,12 @@ public class CategoryReadView extends FrameLayout {
             });
         }
         else {
-            TextView view = findViewById(R.id.categoryName);
-            view.setOnClickListener(v -> {
-                presenter.initializeUserCategory(position);
-            });
+            if(isClickable) {
+                TextView view = findViewById(R.id.categoryName);
+                view.setOnClickListener(v -> {
+                    presenter.initializeUserCategory(position);
+                });
+            }
         }
     }
 }
