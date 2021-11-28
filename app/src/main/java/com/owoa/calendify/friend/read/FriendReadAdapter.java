@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.read.CategoryReadPresenter;
 import com.owoa.calendify.friend.FriendModel;
+import com.owoa.calendify.friend.delete.FriendDeletePresenter;
 import com.owoa.calendify.schedule.ScheduleModel;
 import com.owoa.calendify.schedule.delete.ScheduleDeletePresenter;
 import com.owoa.calendify.schedule.update.ScheduleUpdateActivity;
@@ -95,7 +96,8 @@ public class FriendReadAdapter extends BaseAdapter {
                                 Toast.makeText(activity, "공유 카테고리를 수정합니다.", Toast.LENGTH_SHORT).show();
                                 break;
                             case 1:
-                                Toast.makeText(activity, "친구를 삭제합니다.", Toast.LENGTH_SHORT).show();
+                                FriendDeletePresenter presenter = new FriendDeletePresenter(activity, friendModels.get(position).getRequestUid(), friendModels.get(position).getTargetUid());
+                                presenter.deleteFriend();
                         }
 
                     }
