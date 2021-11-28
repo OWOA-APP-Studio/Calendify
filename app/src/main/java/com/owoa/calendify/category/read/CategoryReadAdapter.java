@@ -25,6 +25,12 @@ public class CategoryReadAdapter extends RecyclerView.Adapter {
         this.presenter = presenter;
     }
 
+    public CategoryReadAdapter(String[] categoryArray, Activity activity, String uid) {
+        this.categoryArray = categoryArray;
+        this.activity = activity;
+        this.presenter = new CategoryReadPresenter(uid, activity);
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new CategoryViewHolder(new CategoryReadView(parent.getContext()));

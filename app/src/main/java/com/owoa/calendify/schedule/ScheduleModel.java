@@ -1,4 +1,4 @@
-package com.owoa.calendify.schedule.create;
+package com.owoa.calendify.schedule;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -21,6 +21,7 @@ public class FriendReadActivity extends AppCompatActivity {
     ListView friendList;
 
     CategoryReadPresenter categoryPresenter;
+    FriendReadPresenter presenter;
 
     String uid;
     Activity activity;
@@ -32,12 +33,16 @@ public class FriendReadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_list);
-        txtResult = findViewById(R.id.friend_ID);
-        friendList = findViewById(R.id.friend_list);
-        friend_ID = (TextView)findViewById(R.id.friend_ID);
+        activity = this;
 
         Intent intent = getIntent();
         uid = intent.getStringExtra(getString(R.string.uid));
+
+        presenter = new FriendReadPresenter(activity,uid);
+
+        txtResult = findViewById(R.id.friend_ID);
+        friendList = findViewById(R.id.friend_list);
+        friend_ID = findViewById(R.id.friend_ID);
 
         friendCategoryView = findViewById(R.id.friend_category_list);
 
@@ -52,7 +57,8 @@ public class FriendReadActivity extends AppCompatActivity {
         });
         categoryPresenter = new CategoryReadPresenter(uid, activity);
         categoryPresenter.setRecyclerView(friendCategoryView);
-        categoryPresenter.loadFriendCategory();
+
+        presenter.setFriendList(friendList);
+        presenter.loadFriends();
     }
-    //friend_ID.setText(result);
 }
