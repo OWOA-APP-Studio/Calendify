@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.read.CategoryReadPresenter;
 import com.owoa.calendify.friend.create.FriendCreateActivity;
+import com.owoa.calendify.friend.request.FriendRequestActivity;
 
 
 public class FriendReadActivity extends AppCompatActivity {
@@ -50,6 +51,17 @@ public class FriendReadActivity extends AppCompatActivity {
                 startActivityForResult(intent2,1);
             }
         });
+
+        //FriendRequestActivity 로 이동
+        ImageView friendRequestButton = findViewById(R.id.friend_request_button);
+        friendRequestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(FriendReadActivity.this, FriendRequestActivity.class);
+                startActivity(intent3);
+            }
+        });
+
         categoryPresenter = new CategoryReadPresenter(uid, activity);
         categoryPresenter.setRecyclerView(friendCategoryView);
         categoryPresenter.loadFriendCategory();
