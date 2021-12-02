@@ -8,18 +8,25 @@
         android:layout_width="match_parent"
         android:layout_height="650dp"
         android:padding="5dp">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
-            <ListView
-                android:id="@+id/friend_request_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:background="#DCDCDC"/>
-        </ScrollView>
+<!--        <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:fillViewport="true">-->
+<!--            <ListView-->
+<!--                android:id="@+id/friend_request_list"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:divider="@null"-->
+<!--                android:dividerHeight="0dp"-->
+<!--                android:background="#DCDCDC"/>-->
+<!--        </ScrollView>-->
+        <TextView
+            android:id="@+id/friend_request_text"
+            android:layout_width="311dp"
+            android:layout_height="208dp"
+            android:text="친구 이름">
+
+        </TextView>
     </LinearLayout>
 
     <ImageView

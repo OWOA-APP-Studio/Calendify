@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.owoa.calendify.R;
+import com.owoa.calendify.friend.request.FriendRequestActivity;
 
 
 import org.json.JSONException;
@@ -34,6 +35,7 @@ import static com.owoa.calendify.friend.create.FriendCreateData.REQUEST_ADD_FRIE
 //}
 public class FriendCreateActivity extends Activity {
     FriendCreatePresenter presenter;
+    FriendRequestActivity activity;
     Button confirmButton;
     EditText targetId;
 
@@ -44,7 +46,7 @@ public class FriendCreateActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new FriendCreatePresenter(this);
-
+        
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_friend_add);
         confirmButton = findViewById(R.id.friend_add_confirm);
@@ -62,15 +64,18 @@ public class FriendCreateActivity extends Activity {
                 resultIntent.putExtra("name", targetId.getText().toString());
                 targetUid = targetId.getText().toString();
                 setResult(RESULT_OK, resultIntent);
-
+                activity.targetUid(targetUid);
                 requestAddFriend();
-
                 //액티비티(팝업) 닫기
                 finish();
             }
         });
 
     }
+
+
+
+
 
     private void requestAddFriend() {
         StringRequest requestAddFriend = new StringRequest(Request.Method.POST, REQUEST_ADD_FRIEND_URL, new Response.Listener<String>() {
@@ -83,10 +88,12 @@ public class FriendCreateActivity extends Activity {
                     switch (result.charAt(0)) {
                         case 'S':
                             Toast.makeText(getApplicationContext(), "친구 추가를 신청했습니다.", Toast.LENGTH_SHORT).show();
+                            activity.targetUid(targetUid);
                             finish();
                             break;
                         case 'D':
                             Toast.makeText(getApplicationContext(), "이미 친구 신청을 보냈습니다.", Toast.LENGTH_SHORT).show();
+                            activity.targetUid(targetUid);
                             break;
                         case 'F':
                         default:
@@ -109,6 +116,7 @@ public class FriendCreateActivity extends Activity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                activity.targetUid(targetUid);
                 params.put(getString(R.string.uid), uid);
                 params.put("tg_uid", targetUid);
                 return params;

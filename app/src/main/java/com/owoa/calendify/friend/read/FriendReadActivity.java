@@ -22,6 +22,7 @@ public class FriendReadActivity extends AppCompatActivity {
     ListView friendList;
 
     CategoryReadPresenter categoryPresenter;
+    FriendRequestActivity friendActivity;
 
     String uid;
     Activity activity;
@@ -49,6 +50,7 @@ public class FriendReadActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(FriendReadActivity.this, FriendCreateActivity.class);
                 intent2.putExtra(getString(R.string.uid), uid);
                 startActivityForResult(intent2,1);
+
             }
         });
 
