@@ -66,5 +66,5 @@ public class FriendReadActivity extends AppCompatActivity {
         categoryPresenter.setRecyclerView(friendCategoryView);
         categoryPresenter.loadFriendCategory();
     }
-    //friend_ID.setText(result);
+
 }

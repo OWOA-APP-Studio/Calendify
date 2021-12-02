@@ -28,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="10pt"
+                android:id="@+id/item_friend_name"
                 tools:text="닉네임" />
 
             <androidx.recyclerview.widget.RecyclerView

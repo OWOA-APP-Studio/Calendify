@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.owoa.calendify.category.read.CategoryReadData.REQUEST_READ_CATEGORY_URL;
+import static com.owoa.calendify.category.read.CategoryReadData.REQUEST_READ_FRIEND_CATEGORY_URL;
 
 public class CategoryReadPresenter {
     String categories[];
@@ -109,5 +110,6 @@ public class CategoryReadPresenter {
     public void setRecyclerView(RecyclerView recyclerView) {
         this.recyclerView = recyclerView;
     }
+
 
 }
