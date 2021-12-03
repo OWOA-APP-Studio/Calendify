@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.owoa.calendify.friend.request.FriendRequestModel.REQUEST_FRIEND_REQUEST_LIST_URL;
+import static com.owoa.calendify.friend.request.FriendRequestModel.REQUEST_FRIEND_REQUEST_UPDATE_URL;
 
 public class FriendRequestAdapter extends BaseAdapter {
     LayoutInflater layoutInflater;
@@ -39,7 +40,7 @@ public class FriendRequestAdapter extends BaseAdapter {
 
     String uid;
 
-    public FriendRequestAdapter(String uid, JSONArray friends, Activity activity) {
+    public FriendRequestAdapter(Activity activity, JSONArray friends,String uid) {
         this.uid = uid;
         this.activity = activity;
         this.layoutInflater = LayoutInflater.from(activity.getApplicationContext());
@@ -73,8 +74,6 @@ public class FriendRequestAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.item_request_friend, null);
 
-        LinearLayout item = view.findViewById(R.id.request_friend_item);
-
         TextView id = view.findViewById(R.id.request_friend_id);
         TextView datetime = view.findViewById(R.id.request_friend_datetime);
 
@@ -89,7 +88,7 @@ public class FriendRequestAdapter extends BaseAdapter {
             public void onClick(View view) {
                 // Todo: 친구 요청을 수락하면 친구 요청 리스트에 사라지도록 한다. slt_res = 1;
                 denied.setVisibility(View.INVISIBLE);
-                accept.setBackgroundColor(Color.parseColor("#808080"));
+                denied.setBackgroundTintList(view.getResources().getColorStateList(R.color.gray));
                 String requestUid = friendModels.get(position).getRequestUid();
                 String targetUid = friendModels.get(position).getTargetUid();
 
@@ -102,7 +101,7 @@ public class FriendRequestAdapter extends BaseAdapter {
             public void onClick(View view) {
                 // Todo: 친구 요청을 거절하면 친구 요청 리스트에 사라지도록 한다.
                 accept.setVisibility(View.INVISIBLE);
-                denied.setBackgroundColor(Color.parseColor("#808080"));
+                denied.setBackgroundTintList(view.getResources().getColorStateList(R.color.gray));
                 String requestUid = friendModels.get(position).getRequestUid();
                 String targetUid = friendModels.get(position).getTargetUid();
 
@@ -114,7 +113,7 @@ public class FriendRequestAdapter extends BaseAdapter {
     }
 
     public void updateFriendRequest(int res, String requestUid, String targetUid ){
-        StringRequest updateRequestFriend = new StringRequest(Request.Method.POST, REQUEST_FRIEND_REQUEST_LIST_URL, new Response.Listener<String>() {
+        StringRequest updateRequestFriend = new StringRequest(Request.Method.POST, REQUEST_FRIEND_REQUEST_UPDATE_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -126,6 +125,7 @@ public class FriendRequestAdapter extends BaseAdapter {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.d("FRR-ERR", error.getMessage());
                 return;
             }
         }) {
@@ -133,7 +133,6 @@ public class FriendRequestAdapter extends BaseAdapter {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("slt_res", String.valueOf(res));
-                params.put("req_uid", requestUid);
                 params.put("tg_uid", targetUid);
                 return params;
             }

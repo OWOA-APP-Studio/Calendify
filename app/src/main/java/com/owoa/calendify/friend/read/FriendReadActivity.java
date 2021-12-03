@@ -64,6 +64,7 @@ public class FriendReadActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent3 = new Intent(FriendReadActivity.this, FriendRequestActivity.class);
+                intent3.putExtra(getString(R.string.uid), uid);
                 startActivity(intent3);
             }
         });

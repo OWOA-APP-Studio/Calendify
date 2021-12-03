@@ -32,6 +32,7 @@ public class FriendRequestActivity extends AppCompatActivity {
         requestFriendListView = findViewById(R.id.friend_request_list);
 
         presenter = new FriendRequestPresenter(this, uid);
+        presenter.setListView(requestFriendListView);
         presenter.loadRequestFriends();
     }
 }
