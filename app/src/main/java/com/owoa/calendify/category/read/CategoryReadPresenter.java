@@ -45,7 +45,7 @@ public class CategoryReadPresenter {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.d("CATEGORY-LOG",response);
+                    Log.d("CATEGORY-CRP48",response);
                     jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("카테고리");
 
@@ -65,7 +65,7 @@ public class CategoryReadPresenter {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(activity.getApplicationContext(), "서버 통신 실패." + error.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("CATEGORY-TAG", error.getMessage());
+                Log.d("CATEGORY-CRP68", error.getMessage());
                 return;
             }
         }) {
@@ -81,8 +81,59 @@ public class CategoryReadPresenter {
         queue.add(categoryReadRequest);
     }
 
-    public void loadFriendCategory() {
+    public void loadFriendCategory(String targetUid) {
+        StringRequest friendCategoryReadRequest = new StringRequest(Request.Method.POST, REQUEST_READ_FRIEND_CATEGORY_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.d("CATEGORY-CRP89",response);
+                    String jsonName = "친구 카테고리";
+                    jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray(jsonName);
 
+                    initializeFriendCategory(targetUid);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(activity, "오류"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d("CATEGORY-CRP98", e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(activity.getApplicationContext(), "서버 통신 실패." + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("CATEGORY-CRP105", error.getMessage());
+                return;
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put(activity.getString(R.string.uid), uid);
+                params.put("target_uid", targetUid);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(activity.getApplicationContext());
+        queue.add(friendCategoryReadRequest);
+    }
+
+    public void initializeFriendCategory(String targetUid) {
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("친구 카테고리");
+            categories = new String[jsonArray.length()];
+            for(int i = 0; i < jsonArray.length(); i++) {
+                JSONObject categoryData = jsonArray.getJSONObject(i);
+                categories[i] = categoryData.getString("ctg_nm");
+            };
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            adapter = new CategoryReadAdapter(categories, activity, targetUid);
+            recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     public void initializeUserCategory (int index) {

@@ -22,6 +22,9 @@ import com.owoa.calendify.schedule.ScheduleModel;
 import com.owoa.calendify.schedule.delete.ScheduleDeletePresenter;
 import com.owoa.calendify.schedule.update.ScheduleUpdateActivity;
 import com.owoa.calendify.share.update.ShareUpdateActivity;
+import com.owoa.calendify.schedule.ScheduleModel;
+import com.owoa.calendify.schedule.delete.ScheduleDeletePresenter;
+import com.owoa.calendify.schedule.update.ScheduleUpdateActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,6 +101,7 @@ public class FriendReadAdapter extends BaseAdapter {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
+                                Toast.makeText(activity, "공유 카테고리를 수정합니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(activity, ShareUpdateActivity.class);
                                 intent.putExtra(activity.getString(R.string.uid), uid);
                                 intent.putExtra("req_uid", friendModels.get(position).getRequestUid());
@@ -107,6 +111,8 @@ public class FriendReadAdapter extends BaseAdapter {
                             case 1:
                                 FriendDeletePresenter presenter = new FriendDeletePresenter(activity, friendModels.get(position).getRequestUid(), friendModels.get(position).getTargetUid());
                                 presenter.deleteFriend();
+                                Toast.makeText(activity, "친구를 삭제합니다.", Toast.LENGTH_SHORT).show();
+                                break;
                         }
 
                     }
@@ -124,7 +130,7 @@ public class FriendReadAdapter extends BaseAdapter {
 
         CategoryReadPresenter categoryReadPresenter = new CategoryReadPresenter(uid, activity);
         categoryReadPresenter.setRecyclerView(recyclerView);
-        categoryReadPresenter.loadFriendCategory();
+        categoryReadPresenter.loadFriendCategory(friendUid);
     }
 
 }

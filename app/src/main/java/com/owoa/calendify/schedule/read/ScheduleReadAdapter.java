@@ -3,20 +3,21 @@ package com.owoa.calendify.schedule.read;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.owoa.calendify.R;
-import com.owoa.calendify.schedule.create.ScheduleModel;
+import com.owoa.calendify.schedule.ScheduleModel;
 import com.owoa.calendify.schedule.delete.ScheduleDeletePresenter;
+import com.owoa.calendify.schedule.update.ScheduleUpdateActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,10 +81,10 @@ public class ScheduleReadAdapter extends BaseAdapter {
 
                                 switch (which) {
                                     case 0:
-                                        Toast.makeText(activity, "일정 수정 기능입니다.", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(activity, ScheduleUpdateActivity.class);
+                                        activity.startActivity(intent);
                                         break;
                                     case 1:
-                                        Toast.makeText(activity, "일정을 삭제했습니다.", Toast.LENGTH_SHORT).show();
                                         ScheduleDeletePresenter presenter = new ScheduleDeletePresenter(activity, activity.getUid(), model.getScheduleId());
                                         presenter.deleteSchedule();
                                 }
