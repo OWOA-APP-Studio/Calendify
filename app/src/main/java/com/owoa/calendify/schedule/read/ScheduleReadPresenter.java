@@ -41,9 +41,7 @@ public class ScheduleReadPresenter {
         this.category = index;
     }
 
-    public void setListView(ListView listView) {
-        this.listView = listView;
-    }
+    public void setListView(ListView listView) { this.listView = listView; }
 
     public void requestSchedules() {
         StringRequest scheduleRequest = new StringRequest(Request.Method.POST, REQUEST_SCHEDULES_URL, new Response.Listener<String>() {

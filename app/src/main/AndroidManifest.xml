@@ -26,9 +26,8 @@
         <activity android:name=".schedule.create.ScheduleCreateActivity" />
         <activity android:name=".schedule.update.ScheduleUpdateActivity" />
         <activity android:name=".friend.read.FriendReadActivity" />
-        <activity
-            android:name=".friend.create.FriendCreateActivity"
-            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".friend.create.FriendCreateActivity" />
+        <activity android:name=".friend.request.FriendRequestActivity"/>
         <activity android:name=".sign.in.SignInActivity" />
         <activity android:name=".sign.up.SignUpActivity" />
         <activity android:name=".intro.IntroActivity" />

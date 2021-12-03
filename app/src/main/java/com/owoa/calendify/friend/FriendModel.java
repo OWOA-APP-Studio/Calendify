@@ -7,6 +7,7 @@ public class FriendModel {
     private String requestUid;
     private String targetUid;
     private String selectDateTime;
+    private String selectResult;
 
 
     public FriendModel(JSONObject object) {
@@ -14,6 +15,7 @@ public class FriendModel {
             requestUid = object.getString("req_uid");
             targetUid = object.getString("tg_uid");
             selectDateTime = object.getString("slt_dt");
+            selectResult = object.getString("slt_res");
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -30,5 +32,9 @@ public class FriendModel {
 
     public String getSelectDateTime() {
         return selectDateTime;
+    }
+
+    public String getSelectResult() {
+        return selectResult;
     }
 }

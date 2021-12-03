@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.owoa.calendify.R;
+import com.owoa.calendify.friend.request.FriendRequestActivity;
 
 
 import org.json.JSONException;
@@ -34,6 +35,7 @@ import static com.owoa.calendify.friend.create.FriendCreateData.REQUEST_ADD_FRIE
 //}
 public class FriendCreateActivity extends Activity {
     FriendCreatePresenter presenter;
+    FriendRequestActivity activity;
     Button confirmButton;
     EditText targetId;
 
@@ -44,7 +46,7 @@ public class FriendCreateActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new FriendCreatePresenter(this);
-
+        
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_friend_add);
         confirmButton = findViewById(R.id.friend_add_confirm);
@@ -62,15 +64,17 @@ public class FriendCreateActivity extends Activity {
                 resultIntent.putExtra("name", targetId.getText().toString());
                 targetUid = targetId.getText().toString();
                 setResult(RESULT_OK, resultIntent);
-
                 requestAddFriend();
-
                 //액티비티(팝업) 닫기
                 finish();
             }
         });
 
     }
+
+
+
+
 
     private void requestAddFriend() {
         StringRequest requestAddFriend = new StringRequest(Request.Method.POST, REQUEST_ADD_FRIEND_URL, new Response.Listener<String>() {

@@ -162,4 +162,5 @@ public class CategoryReadPresenter {
         this.recyclerView = recyclerView;
     }
 
+
 }

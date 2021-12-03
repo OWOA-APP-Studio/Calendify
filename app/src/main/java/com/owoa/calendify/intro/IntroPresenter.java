@@ -79,7 +79,6 @@ public class IntroPresenter {
     }
 
     public void checkAccountInfo(String id) {
-
         String uid = id;
         StringRequest signInRequest = new StringRequest(Request.Method.POST, REQUEST_SOCIAL_SIGN_IN_URL, response -> {
             try {
