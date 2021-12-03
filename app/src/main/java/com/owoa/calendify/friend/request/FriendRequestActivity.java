@@ -14,7 +14,7 @@ import com.owoa.calendify.friend.create.FriendCreateActivity;
 public class FriendRequestActivity extends AppCompatActivity {
 
     TextView request;
-    String Uid = "이게 들어오네 ";
+    String Uid;
 
 
 
@@ -38,10 +38,7 @@ public class FriendRequestActivity extends AppCompatActivity {
         });
     }
 
-    public void targetUid(String targetUid){
-        Uid = targetUid;
 
-    }
 
 
 }

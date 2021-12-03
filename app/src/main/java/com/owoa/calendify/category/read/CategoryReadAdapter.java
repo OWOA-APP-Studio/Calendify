@@ -15,6 +15,8 @@ public class CategoryReadAdapter extends RecyclerView.Adapter {
     private Activity activity;
     private CategoryReadPresenter presenter;
 
+    private boolean isClickable;
+
     public String[] getCategories() {
         return categoryArray;
     }
@@ -23,6 +25,14 @@ public class CategoryReadAdapter extends RecyclerView.Adapter {
         this.categoryArray = categoryArray;
         this.activity = activity;
         this.presenter = presenter;
+        this.isClickable = true;
+    }
+
+    public CategoryReadAdapter(String[] categoryArray, Activity activity, String uid) {
+        this.categoryArray = categoryArray;
+        this.activity = activity;
+        this.presenter = new CategoryReadPresenter(uid, activity);
+        this.isClickable = false;
     }
 
     @Override
@@ -32,7 +42,7 @@ public class CategoryReadAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((CategoryReadView) holder.itemView).displayItem(categoryArray[position], activity, position, presenter);
+        ((CategoryReadView) holder.itemView).displayItem(categoryArray[position], activity, position, presenter, isClickable);
     }
 
     @Override

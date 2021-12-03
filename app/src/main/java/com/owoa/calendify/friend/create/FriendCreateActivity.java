@@ -64,7 +64,7 @@ public class FriendCreateActivity extends Activity {
                 resultIntent.putExtra("name", targetId.getText().toString());
                 targetUid = targetId.getText().toString();
                 setResult(RESULT_OK, resultIntent);
-                activity.targetUid(targetUid);
+
                 requestAddFriend();
                 //액티비티(팝업) 닫기
                 finish();
@@ -88,12 +88,10 @@ public class FriendCreateActivity extends Activity {
                     switch (result.charAt(0)) {
                         case 'S':
                             Toast.makeText(getApplicationContext(), "친구 추가를 신청했습니다.", Toast.LENGTH_SHORT).show();
-                            activity.targetUid(targetUid);
                             finish();
                             break;
                         case 'D':
                             Toast.makeText(getApplicationContext(), "이미 친구 신청을 보냈습니다.", Toast.LENGTH_SHORT).show();
-                            activity.targetUid(targetUid);
                             break;
                         case 'F':
                         default:
@@ -116,7 +114,6 @@ public class FriendCreateActivity extends Activity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                activity.targetUid(targetUid);
                 params.put(getString(R.string.uid), uid);
                 params.put("tg_uid", targetUid);
                 return params;

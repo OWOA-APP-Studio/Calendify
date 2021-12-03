@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ScheduleReadActivity extends AppCompatActivity {
-    ScheduleReadActivity activity;
+    Activity activity;
     CategoryReadPresenter categoryReadPresenter;
     String[] categories;
     ListView scheduleListView;
@@ -54,6 +55,7 @@ public class ScheduleReadActivity extends AppCompatActivity {
         scheduleListView = findViewById(R.id.schedule_list);
 
         RecyclerView categoryView = findViewById(R.id.category_list);
+
         categoryReadPresenter = new CategoryReadPresenter(uid, activity);
         categoryReadPresenter.setRecyclerView(categoryView);
         categoryReadPresenter.loadUserCategory();
@@ -80,6 +82,7 @@ public class ScheduleReadActivity extends AppCompatActivity {
         scheduleNavigationButton.setOnClickListener(view -> drawerLayout.openDrawer(drawerView));
     }
 
+    @NonNull
     public void setCategories(String[] categories) {
         this.categories = categories;
     }
