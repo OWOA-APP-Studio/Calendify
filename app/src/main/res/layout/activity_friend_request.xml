@@ -7,36 +7,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="650dp"
-        android:padding="5dp">
-<!--        <ScrollView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:fillViewport="true">-->
-<!--            <ListView-->
-<!--                android:id="@+id/friend_request_list"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:divider="@null"-->
-<!--                android:dividerHeight="0dp"-->
-<!--                android:background="#DCDCDC"/>-->
-<!--        </ScrollView>-->
-        <TextView
-            android:id="@+id/friend_request_text"
-            android:layout_width="311dp"
-            android:layout_height="208dp"
-            android:text="친구 이름">
-
-        </TextView>
+        android:padding="5dp"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+            <ListView
+                android:id="@+id/friend_request_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:background="#DCDCDC"/>
+        </ScrollView>
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/create_schedule_button"
-        android:src="@drawable/add_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="right"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp" />
-
-
 </LinearLayout>
