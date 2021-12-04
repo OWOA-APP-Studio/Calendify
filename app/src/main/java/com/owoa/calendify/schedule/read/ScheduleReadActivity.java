@@ -90,6 +90,7 @@ public class ScheduleReadActivity extends AppCompatActivity {
     public void loadSchedule(int index) {
         ScheduleReadPresenter presenter = new ScheduleReadPresenter(activity, categories, index);
         presenter.setListView(findViewById(R.id.schedule_list));
+        presenter.setUid(uid);
         presenter.requestSchedules();
     }
 

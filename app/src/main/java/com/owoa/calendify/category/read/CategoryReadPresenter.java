@@ -16,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.owoa.calendify.R;
 import com.owoa.calendify.schedule.read.ScheduleReadActivity;
+import com.owoa.calendify.share.read.ShareReadActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,10 +35,19 @@ public class CategoryReadPresenter {
     RecyclerView recyclerView;
     CategoryReadAdapter adapter;
     JSONObject jsonObject;
+    ShareReadActivity shareReadActivity;
+
+    public CategoryReadAdapter getAdapter() {
+        return adapter;
+    }
 
     public CategoryReadPresenter(String uid, Activity activity) {
         this.uid = uid;
         this.activity = activity;
+    }
+
+    public void setShareReadActivity(ShareReadActivity shareReadActivity) {
+        this.shareReadActivity = shareReadActivity;
     }
 
     public void loadUserCategory() {
@@ -87,11 +97,9 @@ public class CategoryReadPresenter {
             public void onResponse(String response) {
                 try {
                     Log.d("CATEGORY-CRP89",response);
-                    String jsonName = "친구 카테고리";
                     jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray(jsonName);
 
-                    initializeFriendCategory(targetUid);
+                    initializeFriendCategory(targetUid, 0);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(activity, "오류"+e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -119,7 +127,7 @@ public class CategoryReadPresenter {
         queue.add(friendCategoryReadRequest);
     }
 
-    public void initializeFriendCategory(String targetUid) {
+    public void initializeFriendCategory(String targetUid, int index) {
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("친구 카테고리");
             categories = new String[jsonArray.length()];
@@ -130,7 +138,17 @@ public class CategoryReadPresenter {
         } catch (JSONException e) {
             e.printStackTrace();
         } finally {
-            adapter = new CategoryReadAdapter(categories, activity, targetUid);
+            if(shareReadActivity != null) {
+                adapter = new CategoryReadAdapter(categories, activity, targetUid, true);
+                adapter.setPresenter(this);
+                ShareReadActivity shareReadActivity = (ShareReadActivity) activity;
+                shareReadActivity.setCategories(categories);
+                shareReadActivity.loadSchedule(index);
+            }
+            else {
+                adapter = new CategoryReadAdapter(categories, activity, targetUid, false);
+            }
+
             recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
             recyclerView.setAdapter(adapter);
         }
@@ -157,6 +175,8 @@ public class CategoryReadPresenter {
             recyclerView.setAdapter(adapter);
         }
     }
+
+
 
     public void setRecyclerView(RecyclerView recyclerView) {
         this.recyclerView = recyclerView;

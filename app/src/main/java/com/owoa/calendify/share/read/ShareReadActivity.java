@@ -32,35 +32,36 @@ public class ShareReadActivity extends AppCompatActivity {
     String[] categories;
     ListView scheduleListView;
 
-    public ShareReadActivity() {
+    public void setCategories(String[] categories) {
+        this.categories = categories;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule_read);
+        setContentView(R.layout.activity_share_schedule_read);
 
         Intent intent = getIntent();
         uid = intent.getStringExtra(getString(R.string.uid));
+        targetUid = intent.getStringExtra("targetUid");
         activity = this;
 
-        scheduleListView = findViewById(R.id.schedule_list);
+        scheduleListView = findViewById(R.id.share_schedule_list);
 
-        RecyclerView categoryView = findViewById(R.id.category_list);
+        RecyclerView categoryView = findViewById(R.id.share_category_list);
 
         categoryReadPresenter = new CategoryReadPresenter(targetUid, activity);
         categoryReadPresenter.setRecyclerView(categoryView);
-        categoryReadPresenter.loadUserCategory();
+        categoryReadPresenter.setShareReadActivity(this);
+
+        categoryReadPresenter.loadFriendCategory(targetUid);
     }
 
-    @NonNull
-    public void setCategories(String[] categories) {
-        this.categories = categories;
-    }
 
     public void loadSchedule(int index) {
         ScheduleReadPresenter presenter = new ScheduleReadPresenter(activity, categories, index);
-        presenter.setListView(findViewById(R.id.schedule_list));
+        presenter.setListView(findViewById(R.id.share_schedule_list));
+        presenter.setUid(targetUid);
         presenter.requestSchedules();
     }
 }

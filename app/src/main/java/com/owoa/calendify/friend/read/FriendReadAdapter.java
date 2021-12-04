@@ -21,6 +21,7 @@ import com.owoa.calendify.friend.delete.FriendDeletePresenter;
 import com.owoa.calendify.schedule.ScheduleModel;
 import com.owoa.calendify.schedule.delete.ScheduleDeletePresenter;
 import com.owoa.calendify.schedule.update.ScheduleUpdateActivity;
+import com.owoa.calendify.share.read.ShareReadActivity;
 import com.owoa.calendify.share.update.ShareUpdateActivity;
 import com.owoa.calendify.schedule.ScheduleModel;
 import com.owoa.calendify.schedule.delete.ScheduleDeletePresenter;
@@ -86,6 +87,9 @@ public class FriendReadAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(activity, "친구가 공유한 일정을 보여줍니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity, ShareReadActivity.class);
+                intent.putExtra("targetUid", friendModels.get(position).getTargetUid());
+                activity.startActivity(intent);
             }
         });
 
@@ -115,7 +119,6 @@ public class FriendReadAdapter extends BaseAdapter {
                                 Toast.makeText(activity, "친구를 삭제합니다.", Toast.LENGTH_SHORT).show();
                                 break;
                         }
-
                     }
                 });
                 oDialog.show();

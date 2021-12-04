@@ -14,9 +14,15 @@ import com.owoa.calendify.R;
 import com.owoa.calendify.category.create.CategoryCreateActivity;
 
 public class CategoryReadView extends FrameLayout {
+    String uid;
+
     public CategoryReadView(Context context) {
         super(context);
         initializeView(context);
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     private void initializeView(Context context) {
@@ -43,7 +49,12 @@ public class CategoryReadView extends FrameLayout {
             if(isClickable) {
                 TextView view = findViewById(R.id.categoryName);
                 view.setOnClickListener(v -> {
-                    presenter.initializeUserCategory(position);
+                    if(uid == null) {
+                        presenter.initializeUserCategory(position);
+                    }
+                    else {
+                        presenter.initializeFriendCategory(uid, position);
+                    }
                 });
             }
         }
