@@ -41,6 +41,10 @@ public class CategoryReadPresenter {
         return adapter;
     }
 
+    public String[] getCategories() {
+        return categories;
+    }
+
     public CategoryReadPresenter(String uid, Activity activity) {
         this.uid = uid;
         this.activity = activity;

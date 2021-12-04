@@ -32,9 +32,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FriendReadAdapter extends BaseAdapter {
     FriendReadActivity activity;
+    CategoryReadPresenter categoryReadPresenter;
     ArrayList<FriendModel> friendModels = new ArrayList<>();
     LayoutInflater layoutInflater;
 
@@ -107,8 +109,11 @@ public class FriendReadAdapter extends BaseAdapter {
                         switch (which) {
                             case 0:
                                 Toast.makeText(activity, "공유 카테고리를 수정합니다.", Toast.LENGTH_SHORT).show();
+                                ArrayList categoryList = new ArrayList<>();
+                                categoryList.addAll(Arrays.asList(categoryReadPresenter.getCategories()).subList(0, categoryReadPresenter.getCategories().length));
                                 Intent intent = new Intent(activity, ShareUpdateActivity.class);
                                 intent.putExtra(activity.getString(R.string.uid), uid);
+                                intent.putExtra("categories", categoryList);
                                 intent.putExtra("req_uid", friendModels.get(position).getRequestUid());
                                 intent.putExtra("tg_uid", friendModels.get(position).getTargetUid());
                                 activity.startActivity(intent);
@@ -132,9 +137,10 @@ public class FriendReadAdapter extends BaseAdapter {
         String uid = activity.uid;
         String friendUid = friendModels.get(position).getTargetUid();
 
-        CategoryReadPresenter categoryReadPresenter = new CategoryReadPresenter(uid, activity);
+        categoryReadPresenter = new CategoryReadPresenter(uid, activity);
         categoryReadPresenter.setRecyclerView(recyclerView);
         categoryReadPresenter.loadFriendCategory(friendUid);
+
     }
 
 }
