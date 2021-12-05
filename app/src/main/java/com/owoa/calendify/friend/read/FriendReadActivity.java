@@ -16,6 +16,8 @@ import com.owoa.calendify.category.read.CategoryReadPresenter;
 import com.owoa.calendify.friend.create.FriendCreateActivity;
 import com.owoa.calendify.friend.request.FriendRequestActivity;
 
+import java.util.ArrayList;
+
 
 public class FriendReadActivity extends AppCompatActivity {
     TextView txtResult;
@@ -26,6 +28,7 @@ public class FriendReadActivity extends AppCompatActivity {
 
     String uid;
     Activity activity;
+    ArrayList categories;
 
     RecyclerView friendCategoryView;
     TextView friend_ID;
@@ -38,8 +41,10 @@ public class FriendReadActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         uid = intent.getStringExtra(getString(R.string.uid));
+        categories = (ArrayList) intent.getSerializableExtra("categories");
 
         presenter = new FriendReadPresenter(activity,uid);
+        presenter.setCategories(categories);
 
         txtResult = findViewById(R.id.friend_ID);
         friendList = findViewById(R.id.friend_list);
@@ -72,6 +77,8 @@ public class FriendReadActivity extends AppCompatActivity {
         categoryPresenter.setRecyclerView(friendCategoryView);
 
         presenter.setFriendList(friendList);
+        presenter.setCategories(categories);
         presenter.loadFriends();
+
     }
 }

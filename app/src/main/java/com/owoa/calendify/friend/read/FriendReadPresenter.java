@@ -18,6 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +34,14 @@ public class FriendReadPresenter {
 
     String uid;
 
+    ArrayList categories;
+
     ListView friendList;
+
+
+    public void setCategories(ArrayList categories) {
+        this.categories = categories;
+    }
 
     public void setFriendList(ListView friendList) {
         this.friendList = friendList;
@@ -43,7 +52,6 @@ public class FriendReadPresenter {
         this.uid = uid;
     }
 
-
     public void loadFriends() {
         StringRequest friendReadRequest = new StringRequest(Request.Method.POST, REQUEST_FRIEND_READ_URL, new Response.Listener<String>() {
             @Override
@@ -53,6 +61,7 @@ public class FriendReadPresenter {
                     jsonObject = new JSONObject(response);
                     friends = jsonObject.getJSONArray("친구목록");
                     adapter = new FriendReadAdapter(activity, friends, uid);
+                    adapter.setCategories(categories);
                     friendList.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

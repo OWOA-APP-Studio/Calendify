@@ -18,14 +18,7 @@ import com.owoa.calendify.R;
 import com.owoa.calendify.category.read.CategoryReadPresenter;
 import com.owoa.calendify.friend.FriendModel;
 import com.owoa.calendify.friend.delete.FriendDeletePresenter;
-import com.owoa.calendify.schedule.ScheduleModel;
-import com.owoa.calendify.schedule.delete.ScheduleDeletePresenter;
-import com.owoa.calendify.schedule.update.ScheduleUpdateActivity;
 import com.owoa.calendify.share.read.ShareReadActivity;
-import com.owoa.calendify.share.update.ShareUpdateActivity;
-import com.owoa.calendify.schedule.ScheduleModel;
-import com.owoa.calendify.schedule.delete.ScheduleDeletePresenter;
-import com.owoa.calendify.schedule.update.ScheduleUpdateActivity;
 import com.owoa.calendify.share.update.ShareUpdateActivity;
 
 import org.json.JSONArray;
@@ -42,7 +35,13 @@ public class FriendReadAdapter extends BaseAdapter {
 
     RecyclerView recyclerView;
 
+    ArrayList categories;
+
     String uid;
+
+    public void setCategories(ArrayList categories) {
+        this.categories = categories;
+    }
 
     public FriendReadAdapter(Activity activity, JSONArray friends, String uid) {
         this.activity = (FriendReadActivity) activity;
@@ -109,11 +108,9 @@ public class FriendReadAdapter extends BaseAdapter {
                         switch (which) {
                             case 0:
                                 Toast.makeText(activity, "공유 카테고리를 수정합니다.", Toast.LENGTH_SHORT).show();
-                                ArrayList categoryList = new ArrayList<>();
-                                categoryList.addAll(Arrays.asList(categoryReadPresenter.getCategories()).subList(0, categoryReadPresenter.getCategories().length));
                                 Intent intent = new Intent(activity, ShareUpdateActivity.class);
                                 intent.putExtra(activity.getString(R.string.uid), uid);
-                                intent.putExtra("categories", categoryList);
+                                intent.putExtra("categories", categories);
                                 intent.putExtra("req_uid", friendModels.get(position).getRequestUid());
                                 intent.putExtra("tg_uid", friendModels.get(position).getTargetUid());
                                 activity.startActivity(intent);

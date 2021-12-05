@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -73,7 +74,11 @@ public class ScheduleReadActivity extends AppCompatActivity {
 
         TextView friendListButton = findViewById(R.id.nav_ex);
         friendListButton.setOnClickListener( view -> {
+            ArrayList categoryList = new ArrayList<>();
+            Log.d("SRA-CTG-CT", categories.length+"#-");
+            categoryList.addAll(Arrays.asList(categories).subList(0, categories.length - 1));
             Intent intent2 = new Intent(ScheduleReadActivity.this, FriendReadActivity.class);
+            intent2.putExtra("categories", categoryList);
             intent2.putExtra(getString(R.string.uid), uid);
             startActivity(intent2);
         });
