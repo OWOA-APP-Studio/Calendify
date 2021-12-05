@@ -33,13 +33,5 @@ public class FriendRequestActivity extends AppCompatActivity {
         presenter = new FriendRequestPresenter(this, uid);
         presenter.setListView(requestFriendListView);
         presenter.loadRequestFriends();
-
-        ImageView create_schedule_button = findViewById(R.id.create_schedule_button);
-        create_schedule_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                request.setText(FriendRequestActivity.this.uid);
-            }
-        });
     }
 }
