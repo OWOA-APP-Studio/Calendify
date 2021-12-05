@@ -17,8 +17,14 @@ public class CategoryReadAdapter extends RecyclerView.Adapter {
 
     private boolean isClickable;
 
-    public String[] getCategories() {
-        return categoryArray;
+    private String uid;
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public void setPresenter(CategoryReadPresenter presenter) {
+        this.presenter = presenter;
     }
 
     public CategoryReadAdapter(String[] categoryArray, Activity activity, CategoryReadPresenter presenter) {
@@ -28,11 +34,11 @@ public class CategoryReadAdapter extends RecyclerView.Adapter {
         this.isClickable = true;
     }
 
-    public CategoryReadAdapter(String[] categoryArray, Activity activity, String uid) {
+    public CategoryReadAdapter(String[] categoryArray, Activity activity, String uid, boolean isClickable) {
         this.categoryArray = categoryArray;
         this.activity = activity;
-        this.presenter = new CategoryReadPresenter(uid, activity);
-        this.isClickable = false;
+        setUid(uid);
+        this.isClickable = isClickable;
     }
 
     @Override
@@ -41,8 +47,19 @@ public class CategoryReadAdapter extends RecyclerView.Adapter {
     }
 
     @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((CategoryReadView) holder.itemView).displayItem(categoryArray[position], activity, position, presenter, isClickable);
+        CategoryReadView view = (CategoryReadView)holder.itemView;
+
+        if (uid != null) {
+            view.setUid(uid);
+        }
+        view.displayItem(categoryArray[position], activity, position, presenter, isClickable);
+//        ((CategoryReadView) holder.itemView).displayItem(categoryArray[position], activity, position, presenter, isClickable);
     }
 
     @Override

@@ -29,13 +29,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class ScheduleReadAdapter extends BaseAdapter {
-    ScheduleReadActivity activity;
+    Activity activity;
     LayoutInflater layoutInflater;
     ArrayList<ScheduleModel> scheduleModels = new ArrayList<>();
     Date nowDateTime;
 
+    String uid;
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public ScheduleReadAdapter(Activity activity, JSONArray schedules) {
-        this.activity = (ScheduleReadActivity) activity;
+        this.activity = activity;
         this.layoutInflater = LayoutInflater.from(activity.getApplicationContext());
 
         for (int i = 0; i < schedules.length(); i++) {
@@ -85,7 +91,7 @@ public class ScheduleReadAdapter extends BaseAdapter {
                                         activity.startActivity(intent);
                                         break;
                                     case 1:
-                                        ScheduleDeletePresenter presenter = new ScheduleDeletePresenter(activity, activity.getUid(), model.getScheduleId());
+                                        ScheduleDeletePresenter presenter = new ScheduleDeletePresenter(activity, uid, model.getScheduleId());
                                         presenter.deleteSchedule();
                                 }
 

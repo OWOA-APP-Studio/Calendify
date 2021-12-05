@@ -24,19 +24,24 @@ import static com.owoa.calendify.schedule.read.ScheduleReadData.REQUEST_SCHEDULE
 
 public class ScheduleReadPresenter {
     ScheduleReadAdapter adapter;
-    ScheduleReadActivity activity;
+    Activity activity;
     String[] categories;
     JSONArray schedules;
     ListView listView;
 
+    String uid;
     int category;
 
     public void setCategory(int category) {
         this.category = category;
     }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public ScheduleReadPresenter(Activity activity, String[] categories, int index) {
-        this.activity = (ScheduleReadActivity) activity;
+        this.activity = activity;
         this.categories = categories;
         this.category = index;
     }
@@ -52,6 +57,7 @@ public class ScheduleReadPresenter {
                     JSONObject jsonObject = new JSONObject(response);
                     schedules = jsonObject.getJSONArray("일정");
                     adapter = new ScheduleReadAdapter(activity, schedules);
+                    adapter.setUid(uid);
                     listView.setAdapter(adapter);
                 } catch (Exception e) {
                     Log.d("SCH-ERR", e.getMessage());
@@ -66,7 +72,7 @@ public class ScheduleReadPresenter {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put(activity.getString(R.string.uid), activity.getUid());
+                params.put(activity.getString(R.string.uid), uid);
                 params.put(activity.getString(R.string.category), categories[category]);
                 return params;
             }
