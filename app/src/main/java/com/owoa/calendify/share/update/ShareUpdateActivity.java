@@ -172,7 +172,6 @@ public class ShareUpdateActivity extends AppCompatActivity {
                                         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                                         queue.add(deleteShareCategoryRequest);
                                     }
-                                    Toast.makeText(ShareUpdateActivity.this, "변경되었습니다." + isChecked, Toast.LENGTH_SHORT).show();
                                 }
                             });
 
