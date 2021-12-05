@@ -64,6 +64,7 @@ public class FriendCreateActivity extends Activity {
                 resultIntent.putExtra("name", targetId.getText().toString());
                 targetUid = targetId.getText().toString();
                 setResult(RESULT_OK, resultIntent);
+
                 requestAddFriend();
                 //액티비티(팝업) 닫기
                 finish();

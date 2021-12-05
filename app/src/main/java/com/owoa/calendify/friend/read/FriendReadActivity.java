@@ -39,7 +39,7 @@ public class FriendReadActivity extends AppCompatActivity {
         Intent intent = getIntent();
         uid = intent.getStringExtra(getString(R.string.uid));
 
-        presenter = new FriendReadPresenter(activity,uid);
+        presenter = new FriendReadPresenter(activity, uid);
 
         txtResult = findViewById(R.id.friend_ID);
         friendList = findViewById(R.id.friend_list);
@@ -53,7 +53,7 @@ public class FriendReadActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent2 = new Intent(FriendReadActivity.this, FriendCreateActivity.class);
                 intent2.putExtra(getString(R.string.uid), uid);
-                startActivityForResult(intent2,1);
+                startActivityForResult(intent2, 1);
 
             }
         });

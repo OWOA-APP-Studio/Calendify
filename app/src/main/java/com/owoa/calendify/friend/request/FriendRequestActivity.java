@@ -1,7 +1,6 @@
 package com.owoa.calendify.friend.request;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +10,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.owoa.calendify.R;
-import com.owoa.calendify.friend.create.FriendCreateActivity;
 
 public class FriendRequestActivity extends AppCompatActivity {
 
     FriendRequestPresenter presenter;
-    String uid;
     ListView requestFriendListView;
+    TextView request;
+    String uid;
 
 
     @Override
@@ -34,5 +33,13 @@ public class FriendRequestActivity extends AppCompatActivity {
         presenter = new FriendRequestPresenter(this, uid);
         presenter.setListView(requestFriendListView);
         presenter.loadRequestFriends();
+
+        ImageView create_schedule_button = findViewById(R.id.create_schedule_button);
+        create_schedule_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                request.setText(FriendRequestActivity.this.uid);
+            }
+        });
     }
 }
