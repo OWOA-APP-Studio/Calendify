@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +20,12 @@ import static com.owoa.calendify.category.create.CategoryCreateData.REQUEST_CATE
 
 public class CategoryCreatePresenter {
     Activity activity;
+
+    ScheduleReadActivity scheduleReadActivity;
+
+    public void setScheduleReadActivity(ScheduleReadActivity scheduleReadActivity) {
+        this.scheduleReadActivity = scheduleReadActivity;
+    }
 
     public CategoryCreatePresenter(Activity activity) {
         this.activity = activity;

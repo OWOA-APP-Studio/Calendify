@@ -9,11 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.owoa.calendify.category.read.CategoryReadView;
+import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
 public class CategoryReadAdapter extends RecyclerView.Adapter {
     private String[] categoryArray;
     private Activity activity;
     private CategoryReadPresenter presenter;
+
+    ScheduleReadActivity scheduleReadActivity;
+
+    public void setScheduleReadActivity(ScheduleReadActivity scheduleReadActivity) {
+        this.scheduleReadActivity = scheduleReadActivity;
+    }
 
     private boolean isClickable;
 
@@ -54,6 +61,7 @@ public class CategoryReadAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         CategoryReadView view = (CategoryReadView)holder.itemView;
+        view.setScheduleReadActivity(scheduleReadActivity);
 
         if (uid != null) {
             view.setUid(uid);

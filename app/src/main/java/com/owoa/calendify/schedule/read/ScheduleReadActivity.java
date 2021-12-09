@@ -7,14 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.read.CategoryReadPresenter;
 
@@ -22,6 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.owoa.calendify.friend.read.FriendReadActivity;
+import com.owoa.calendify.intro.IntroActivity;
 import com.owoa.calendify.schedule.create.ScheduleCreateActivity;
 
 import java.util.ArrayList;
@@ -38,6 +43,14 @@ public class ScheduleReadActivity extends AppCompatActivity {
 
     public String getUid() {
         return uid;
+    }
+
+    public void updateCategories() {
+        categoryReadPresenter.loadUserCategory();
+    }
+
+    public CategoryReadPresenter getCategoryReadPresenter() {
+        return categoryReadPresenter;
     }
 
     @Override
@@ -58,6 +71,7 @@ public class ScheduleReadActivity extends AppCompatActivity {
         RecyclerView categoryView = findViewById(R.id.category_list);
 
         categoryReadPresenter = new CategoryReadPresenter(uid, activity);
+        categoryReadPresenter.setMainActivity(this);
         categoryReadPresenter.setRecyclerView(categoryView);
         categoryReadPresenter.loadUserCategory();
 
@@ -82,6 +96,25 @@ public class ScheduleReadActivity extends AppCompatActivity {
             intent2.putExtra(getString(R.string.uid), uid);
             startActivity(intent2);
         });
+
+
+        TextView logoutButton = findViewById(R.id.nav_logout);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                SharedPreferences autoSignInData = activity.getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = autoSignInData.edit();
+                editor.clear();
+                editor.commit();
+
+                Intent introActivity = new Intent(getApplicationContext(), IntroActivity.class);
+                startActivity(introActivity);
+
+                finish();
+            }
+        });
+
 
         ImageView  scheduleNavigationButton = findViewById(R.id.create_navigation_button);
         scheduleNavigationButton.setOnClickListener(view -> drawerLayout.openDrawer(drawerView));

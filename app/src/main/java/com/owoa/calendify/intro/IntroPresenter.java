@@ -141,7 +141,9 @@ public class IntroPresenter {
     }
 
     public void onClickSignIn() {
-        Intent signInIntent = new Intent(activity, SignInActivity.class);
+        SignInActivity signInActivity = new SignInActivity();
+        signInActivity.setActivity((IntroActivity)activity);
+        Intent signInIntent = new Intent(activity, signInActivity.getClass());
         activity.startActivity(signInIntent);
     }
 

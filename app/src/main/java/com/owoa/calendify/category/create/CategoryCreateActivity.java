@@ -2,6 +2,7 @@ package com.owoa.calendify.category.create;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +11,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.owoa.calendify.R;
+import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
 
 public class CategoryCreateActivity extends AppCompatActivity {
     CategoryCreatePresenter presenter;
+
+    ScheduleReadActivity scheduleReadActivity;
+
+
+    public void setScheduleReadActivity(ScheduleReadActivity scheduleReadActivity) {
+        this.scheduleReadActivity = scheduleReadActivity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,7 @@ public class CategoryCreateActivity extends AppCompatActivity {
             String name = nameEditText.getText().toString();
             String description = descriptionEditText.getText().toString();
             String color = "";
+            presenter.setScheduleReadActivity(scheduleReadActivity);
             presenter.createCategory(uid, name, description, color);
         });
     }
