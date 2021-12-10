@@ -37,6 +37,8 @@ public class CategoryReadPresenter {
     JSONObject jsonObject;
     ShareReadActivity shareReadActivity;
 
+    ScheduleReadActivity scheduleReadActivity;
+
     public CategoryReadAdapter getAdapter() {
         return adapter;
     }
@@ -175,6 +177,7 @@ public class CategoryReadPresenter {
             e.printStackTrace();
         } finally {
             adapter = new CategoryReadAdapter(categories, activity, this);
+            adapter.setScheduleReadActivity(scheduleReadActivity);
             recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
             recyclerView.setAdapter(adapter);
         }
@@ -187,4 +190,7 @@ public class CategoryReadPresenter {
     }
 
 
+    public void setMainActivity(ScheduleReadActivity scheduleReadActivity) {
+        this.scheduleReadActivity = scheduleReadActivity;
+    }
 }

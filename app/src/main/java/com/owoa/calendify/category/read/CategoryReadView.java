@@ -12,9 +12,15 @@ import android.widget.Toast;
 
 import com.owoa.calendify.R;
 import com.owoa.calendify.category.create.CategoryCreateActivity;
+import com.owoa.calendify.schedule.read.ScheduleReadActivity;
 
 public class CategoryReadView extends FrameLayout {
     String uid;
+    ScheduleReadActivity scheduleReadActivity;
+
+    public void setScheduleReadActivity(ScheduleReadActivity scheduleReadActivity) {
+        this.scheduleReadActivity = scheduleReadActivity;
+    }
 
     public CategoryReadView(Context context) {
         super(context);
@@ -40,8 +46,12 @@ public class CategoryReadView extends FrameLayout {
             view.setOnClickListener(v -> {
                 String uid = activity.getIntent().getStringExtra(activity.getString(R.string.uid));
 
-                Intent intent = new Intent(activity, CategoryCreateActivity.class);
+                CategoryCreateActivity categoryCreateActivity = new CategoryCreateActivity();
+                categoryCreateActivity.setScheduleReadActivity(scheduleReadActivity);
+
+                Intent intent = new Intent(activity, categoryCreateActivity.getClass());
                 intent.putExtra(activity.getString(R.string.uid), uid);
+
                 activity.startActivity(intent);
             });
         }

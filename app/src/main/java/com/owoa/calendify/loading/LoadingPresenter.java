@@ -2,6 +2,7 @@ package com.owoa.calendify.loading;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import com.owoa.calendify.intro.IntroActivity;
 import com.owoa.calendify.intro.IntroPresenter;
@@ -19,10 +20,12 @@ public class LoadingPresenter {
     }
 
     public void autoSignIn() {
+        Log.d("ASI-TAG", "자동 로그인 입니다." + data.getId());
         introPresenter.setActivity(activity);
         if(isExistData()) {
             signInPresenter = new SignInPresenter(activity);
             if(isSocialSignInData()) {
+                Log.d("LP-TAG", "소셜 로그인 정보입니다.");
                 introPresenter.setActivity(activity);
                 introPresenter.checkAccountInfo(data.getId());
             }
