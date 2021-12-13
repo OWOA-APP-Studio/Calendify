@@ -3,7 +3,9 @@ package com.owoa.calendify.schedule;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ScheduleModel {
+import java.io.Serializable;
+
+public class ScheduleModel implements Serializable {
     private String memberUid;
     private String scheduleId;
     private String title;
@@ -74,6 +76,39 @@ public class ScheduleModel {
     public String getEndDay() {
         return endDay;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setStartDay(String startDay) {
+        this.startDay = startDay;
+    }
+
+    public void setEndDay(String endDay) {
+        this.endDay = endDay;
+    }
+
 
 
     public String getScheduleSelectType() {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.owoa.calendify.schedule.update.ScheduleUpdateActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,14 +36,17 @@ public class ScheduleReadAdapter extends BaseAdapter {
     ArrayList<ScheduleModel> scheduleModels = new ArrayList<>();
     Date nowDateTime;
 
+    String categories[];
     String uid;
 
     public void setUid(String uid) {
         this.uid = uid;
     }
 
-    public ScheduleReadAdapter(Activity activity, JSONArray schedules) {
+    public ScheduleReadAdapter(Activity activity, JSONArray schedules, String[] categories) {
         this.activity = activity;
+        this.categories = categories;
+
         this.layoutInflater = LayoutInflater.from(activity.getApplicationContext());
 
         for (int i = 0; i < schedules.length(); i++) {
@@ -83,11 +88,17 @@ public class ScheduleReadAdapter extends BaseAdapter {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ScheduleModel model = scheduleModels.get(position);
-                                Toast.makeText(activity, select[which] + " : " + model.getScheduleId(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(activity, "일정을 수정합니다.", Toast.LENGTH_LONG).show();
 
                                 switch (which) {
                                     case 0:
                                         Intent intent = new Intent(activity, ScheduleUpdateActivity.class);
+                                        String[] temp = new String[categories.length-1];
+                                        for(int i = 0; i < temp.length; i++)
+                                            temp[i] = categories[i];
+
+                                        intent.putExtra("categories", temp);
+                                        intent.putExtra("model", model);
                                         activity.startActivity(intent);
                                         break;
                                     case 1:
