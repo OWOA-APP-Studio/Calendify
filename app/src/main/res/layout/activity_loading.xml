@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".loading.LoadingActivity">
 
     <TextView
-        android:id="@+id/loading_title"
+        android:id="@+id/title"
         android:layout_width="271dp"
         android:layout_height="53dp"
         android:layout_marginTop="150dp"

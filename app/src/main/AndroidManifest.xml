@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.haebun.calendify">
+    package="com.owoa.calendify">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/calendify"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Calendify">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.Calendify"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".share.update.ShareUpdateActivity"></activity>
+        <activity android:name=".share.read.ShareReadActivity" />
+        <activity android:name=".category.create.CategoryCreateActivity" />
+        <activity android:name=".schedule.read.ScheduleReadActivity" />
+        <activity android:name=".loading.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".schedule.create.ScheduleCreateActivity" />
+        <activity android:name=".schedule.update.ScheduleUpdateActivity" />
+        <activity android:name=".friend.read.FriendReadActivity" />
+        <activity android:name=".friend.create.FriendCreateActivity" />
+        <activity android:name=".friend.request.FriendRequestActivity"/>
+        <activity android:name=".sign.in.SignInActivity" />
+        <activity android:name=".sign.up.SignUpActivity" />
+        <activity android:name=".intro.IntroActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="test">
+        <item>카테고리 선택</item>
+        <item>귀요미</item>
+        <item>존잘</item>
+    </string-array>
+
+    <string-array name="alert">
+        <item>5분 전</item>
+        <item>10분 전</item>
+        <item>30분 전</item>
+        <item>1시간 전</item>
+    </string-array>
+</resources>
