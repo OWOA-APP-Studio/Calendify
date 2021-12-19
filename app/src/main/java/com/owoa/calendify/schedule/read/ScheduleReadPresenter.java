@@ -56,7 +56,7 @@ public class ScheduleReadPresenter {
                     Log.d("SCH-TAG", response);
                     JSONObject jsonObject = new JSONObject(response);
                     schedules = jsonObject.getJSONArray("일정");
-                    adapter = new ScheduleReadAdapter(activity, schedules);
+                    adapter = new ScheduleReadAdapter(activity, schedules, categories);
                     adapter.setUid(uid);
                     listView.setAdapter(adapter);
                 } catch (Exception e) {

@@ -1,33 +1,48 @@
 package com.owoa.calendify.schedule.update;
 
+import androidx.annotation.IdRes;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.IdRes;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.owoa.calendify.R;
+import com.owoa.calendify.schedule.ScheduleModel;
 import com.owoa.calendify.schedule.create.Contract;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ScheduleUpdateActivity extends AppCompatActivity {
+import static com.owoa.calendify.schedule.update.ScheduleUpdateModel.REQUEST_SCHEDULE_UPDATE_URL;
 
 
-    // 날짜 관련 변수 선언 //
+public class ScheduleUpdateActivity extends AppCompatActivity implements Contract.View {
     SimpleDateFormat mFormat_year = new SimpleDateFormat("yyyy");
     SimpleDateFormat mFormat_month = new SimpleDateFormat("MM");
     SimpleDateFormat mFormat_day = new SimpleDateFormat("dd");
@@ -35,8 +50,7 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
     SimpleDateFormat mFormat_hour = new SimpleDateFormat("hh");
     SimpleDateFormat mFormat_minute = new SimpleDateFormat("mm");
 
-    long now = System.currentTimeMillis();
-    Date date = new Date(now);
+    Date date = new Date();
     private int week ,y=0, m=0, d=0, h=0, mi=0;
 
     private int year = Integer.parseInt(mFormat_year.format(date));
@@ -46,152 +60,237 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
     private int hour = Integer.parseInt(mFormat_hour.format(date));
     private int minute = Integer.parseInt(mFormat_minute.format(date));
 
+    private EditText title, description, location;
 
-    // 레이아웃 변수 //
-    private Spinner spinner;
-    private TextView tv_result;
-    private TextView tv_week;
-    private TextView edittext_date;
-    private TextView edittext_time;
-    private Button add_button, date_button, time_button;
-    private RadioButton radioButton_day,radioButton_week;
-    private RadioGroup radioGroup;
-    private EditText sample_Name , sample_detail, sample_location;
-    private Contract.Presenter ScheduleCreatePresenter;
-    private String repeat;
+    private Spinner category_spinner;
 
 
-    // 패턴 연결 //
-    ScheduleUpdatePresenter presenter;
+    private LinearLayout startDateTime;
+    private TextView start_date, start_time;
 
+    private LinearLayout endDateTIme;
+    private TextView end_date, end_time;
+
+    private char repeatType = 'D';
+    private TextView repeat_times;
+
+    private RadioGroup repeatCycleRadioGroup;
+
+    private Button update_button;
+    private CheckBox alarmCheck;
+
+    private String uid;
+    private ArrayList categories;
+    ScheduleModel scheduleModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_schedule_update);
-        presenter = new ScheduleUpdatePresenter(this);
+        setContentView(R.layout.activity_schedule_update);
 
-        spinner = (Spinner) findViewById(R.id.schedule_create_category_spinner);
-//        tv_result = (TextView) findViewById(R.id.tv_result);
-        add_button = (Button) findViewById(R.id.add_button);
+        uid = getIntent().getStringExtra(getString(R.string.uid));
+        categories = new ArrayList();
+        Collections.addAll(categories, (String[]) getIntent().getSerializableExtra("categories"));
 
-        sample_Name = (EditText) findViewById(R.id.schedule_create_title);
-        sample_location = (EditText) findViewById(R.id.schedule_create_location);
+        scheduleModel = (ScheduleModel)getIntent().getSerializableExtra("model");
 
-        radioGroup = (RadioGroup) findViewById(R.id.schedule_create_cycle_radioGroup);
-        radioButton_day = findViewById(R.id.schedule_create_radio_day);
-        radioButton_week = findViewById(R.id.schedule_create_radio_week);
-//        edittext_date = (TextView) findViewById(R.id.sample_date);
-//        edittext_time = (TextView) findViewById(R.id.sample_time);
-        tv_week = (TextView) findViewById(R.id.schedule_create_cycle_repeat_times);
-        radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
+        category_spinner = (Spinner) findViewById(R.id.schedule_update_category_spinner);
+        update_button = (Button) findViewById(R.id.update_button);
 
-        start();
+        startDateTime = findViewById(R.id.schedule_update_start_datetime);
+        endDateTIme = findViewById(R.id.schedule_update_end_datetime);
 
+        start_date = (TextView) findViewById(R.id.schedule_update_start_date);
+        start_time = (TextView) findViewById(R.id.schedule_update_start_time);
 
+        end_date = (TextView) findViewById(R.id.schedule_update_end_date);
+        end_time = (TextView) findViewById(R.id.schedule_update_end_time);
 
+        title = (EditText) findViewById(R.id.schedule_update_title);
+        description = findViewById(R.id.schedule_update_description);
+        location = (EditText) findViewById(R.id.schedule_update_location);
+
+        repeatCycleRadioGroup = (RadioGroup) findViewById(R.id.schedule_update_cycle_radioGroup);
+        repeat_times = (TextView) findViewById(R.id.schedule_update_cycle_repeat_times);
+        repeatCycleRadioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
+
+        alarmCheck = findViewById(R.id.schedule_update_alarm_checkBox);
+
+        initialize();
     }
 
     RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-
-            if(i == R.id.schedule_create_radio_day){
-                repeat = radioButton_day.getText().toString();
-                week = 0;
-            } else if(i == R.id.schedule_create_radio_week){
-                repeat = radioButton_week.getText().toString();
-                week = Integer.parseInt(tv_week.getText().toString());
+            switch (i) {
+                case R.id.schedule_update_radio_day:
+                    repeat_times.setVisibility(View.INVISIBLE);
+                    week = 0;
+                    repeatType = 'D';
+                    break;
+                case R.id.schedule_update_radio_week:
+                    repeat_times.setVisibility(View.VISIBLE);
+                    repeatType = 'W';
+                    break;
             }
         }
     };
 
-    public void start(){
+    protected void initialize() {
+        // 일정 정보 불러오기
+        title.setText(scheduleModel.getTitle());
+
+        start_date.setText(scheduleModel.getStartDay());
+        start_time.setText(scheduleModel.getStartTime());
+
+        end_date.setText(scheduleModel.getEndDay());
+        end_time.setText(scheduleModel.getEndTime());
+
+        location.setText(scheduleModel.getLocation());
+
+        description.setText(scheduleModel.getDescription());
+
+        // 스피너 아이템 설정 //
+        ArrayAdapter categoryAdapter = new ArrayAdapter<>(getApplication(), android.R.layout.simple_spinner_dropdown_item, categories);
+        category_spinner.setAdapter(categoryAdapter);
 
         //카테고리 선택//
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        category_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                tv_result.setText(parent.getItemAtPosition(position).toString());
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { }});
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(ScheduleUpdateActivity.this, "아무것도 선택되지 않았습니다.", Toast.LENGTH_SHORT).show();
+            }});
 
-        // 수정 버튼 //
-        add_button.setOnClickListener(new View.OnClickListener() {
+        // 추가 버튼 //
+        update_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO : click event
-                String name = sample_Name.getText().toString();
-                String detail = sample_detail.getText().toString();
-                String category = tv_result.getText().toString();
-                String date = edittext_date.getText().toString();
-                String time = edittext_time.getText().toString();
-                String location = sample_location.getText().toString();
-                presenter.get(name, detail, category, repeat, week, date, time, location);
+                scheduleModel.setTitle(ScheduleUpdateActivity.this.title.getText().toString());
+                scheduleModel.setDescription(description.getText().toString());
+                scheduleModel.setCategory(category_spinner.getSelectedItem().toString());
+                scheduleModel.setStartTime(start_time.getText().toString());
+                scheduleModel.setEndTime(end_time.getText().toString());
+                scheduleModel.setStartDay(start_date.getText().toString());
+                scheduleModel.setEndDay(end_date.getText().toString());
+                scheduleModel.setLocation(location.getText().toString());
 
-            }
-
-
-        });
-
-        date_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDate();
+                updateSchedule();
             }
         });
 
-        time_button.setOnClickListener(new View.OnClickListener() {
+        // 시작 날짜 & 시간 선택 버튼 //
+        startDateTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTime();
+                showDateTimePicker(start_date, start_time);
+            }
+        });
+
+        endDateTIme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimePicker(end_date, end_time);
             }
         });
     }
 
-    private void showDate() {
+    // 날짜 & 시간 선택 //
+    private void showDateTimePicker(TextView date, TextView time) {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                h = hourOfDay;
+                mi = minute;
+                time.setText(String.format("%d:%d:00", h,mi));
+            }
+        }, hour, minute, true);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 y = year;
                 m = month+1;
                 d = dayOfMonth;
-                edittext_date.setText(String.format("%d년 %d월 %d일", y,m,d));
+                date.setText(String.format("%d-%d-%d", y,m,d));
+
+                timePickerDialog.setMessage("시간");
+                timePickerDialog.show();
             }
 
         },year, month-1, day);
 
         datePickerDialog.setMessage("날짜");
         datePickerDialog.show();
-
-
     }
 
-    private void showTime() {
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                h = hourOfDay;
-                mi = minute;
-                edittext_time.setText(String.format("%d시 %d분", h,mi));
+    // Contract //
+    @Override
+    public void showResult(String name, String detail, String category, String repeat ,int week,String date,String time, String location) {
+//        Toast.makeText(getApplicationContext(),("일정 추가 완료" + "\n"
+//                +"일정명: " + name + "\n"
+//                +"상세내용: " + detail + "\n"
+//                +"카테고리 명: " + category + "\n"
+//                +"반복종류: "+ repeat + " " + week +" 주"+ "\n"
+//                +"날짜: " + date + "\n"
+//                +"시간: " + time + "\n"
+//                +"장소: " + location),Toast.LENGTH_LONG).show();
+    }
+
+    public void updateSchedule() {
+        StringRequest updateCategoryRequest = new StringRequest(Request.Method.POST, REQUEST_SCHEDULE_UPDATE_URL, response -> {
+            try {
+                Log.d("SUA-US", response);
+                JSONObject jsonObject = new JSONObject(response);
+                String result = jsonObject.getString("success");
+                switch (result.charAt(0)) {
+                    case 'S' :
+                        Toast.makeText(this, "일정을 수정했습니다.", Toast.LENGTH_SHORT).show();
+                        finish();
+                        break;
+                    case 'F' :
+                    default:
+                        Toast.makeText(this, "일정을 다시 확인하고 수정해주세요.", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }, hour, minute, true);
+        }, error -> Toast.makeText(getApplicationContext(), "서버가 응답하지 않습니다." + error.getMessage(), Toast.LENGTH_SHORT).show()) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                Log.d("SUA-PRM", scheduleModel.getScheduleId());
+                Log.d("SUA-PRM", title.getText().toString());
+                Log.d("SUA-PRM", description.getText().toString());
+                Log.d("SUA-PRM", category_spinner.getSelectedItem().toString());
+                Log.d("SUA-PRM", location.getText().toString());
+                Log.d("SUA-PRM", start_time.getText().toString());
+                Log.d("SUA-PRM", end_time.getText().toString());
+                Log.d("SUA-PRM", start_date.getText().toString());
+                Log.d("SUA-PRM", end_date.getText().toString());
+                Log.d("SUA-PRM", String.valueOf(alarmCheck.isChecked() ? 1 : -1));
+                Log.d("SUA-PRM", String.valueOf(repeatType));
 
-        timePickerDialog.setMessage("시간");
-        timePickerDialog.show();
-    }
-
-    public void view(String name, String detail, String category, String repeat ,int week,String date,String time, String location) {
-        Toast.makeText(getApplicationContext(),("일정 변경 완료" + "\n"
-                + "일정명: " + name + "\n"
-                + "상세내용: " + detail + "\n"
-                +"카테고리 명: " + category + "\n"
-                +"반복종류: "+ repeat + " " + week +" 주"+ "\n"
-                +"날짜: " + date + "\n"
-                +"시간: " + time + "\n"
-                +"장소: " + location),Toast.LENGTH_LONG).show();
+                params.put("sch_id", scheduleModel.getScheduleId());
+                params.put("sch_ttl", title.getText().toString());
+                params.put("sch_dsc", description.getText().toString());
+                params.put("sch_ctg", category_spinner.getSelectedItem().toString());
+                params.put("sch_lct", location.getText().toString());
+                params.put("sch_stm", start_time.getText().toString());
+                params.put("sch_etm", end_time.getText().toString());
+                params.put("sch_sdy", start_date.getText().toString());
+                params.put("sch_edy", end_date.getText().toString());
+                params.put("sch_slc_alr", String.valueOf(alarmCheck.isChecked() ? 1 : -1));
+                params.put("sch_slc_typ", String.valueOf(repeatType));
+                return params;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(updateCategoryRequest);
     }
 }
-

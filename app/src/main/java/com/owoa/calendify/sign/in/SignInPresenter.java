@@ -1,6 +1,7 @@
 package com.owoa.calendify.sign.in;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Switch;
@@ -35,12 +36,14 @@ public class SignInPresenter {
         this.autoSignInSwitch = autoSignInSwitch;
     }
 
-    public void signIn(String id, String password) {
+    public boolean signIn(String id, String password) {
         userPresenter = new UserPresenter(id, password);
         if(userPresenter.isValidSignInInfo()) {
             checkAccountInfo();
+            return true;
         } else {
             Toast.makeText(activity, "계정 정보가 맞지 않습니다.", Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 
@@ -52,6 +55,13 @@ public class SignInPresenter {
 
                 if(success.equals("1")) {
                     Toast.makeText(activity, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences sharedPreferences = activity.getSharedPreferences("auto", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(activity.getString(R.string.uid),userPresenter.getInfoData().getId());
+                    editor.putString(activity.getString(R.string.password), userPresenter.getInfoData().getPassword());
+                    editor.commit();
+
                     Intent intent = new Intent(activity, ScheduleReadActivity.class);
                     intent.putExtra(activity.getString(R.string.uid), userPresenter.getInfoData().getId());
                     activity.startActivity(intent);

@@ -9,6 +9,7 @@ import android.widget.Switch;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.owoa.calendify.R;
+import com.owoa.calendify.intro.IntroActivity;
 
 
 public class SignInActivity extends AppCompatActivity {
@@ -17,6 +18,11 @@ public class SignInActivity extends AppCompatActivity {
     Button signInButton;
     Switch autoSignInSwitch;
 
+    IntroActivity activity;
+
+    public void setActivity(IntroActivity activity) {
+        this.activity = activity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,9 @@ public class SignInActivity extends AppCompatActivity {
             String id = signInID.getText().toString();
             String password = signInPassword.getText().toString();
 
-            presenter.signIn(id, password);
+            if(presenter.signIn(id, password)) {
+
+            }
         });
     }
 }

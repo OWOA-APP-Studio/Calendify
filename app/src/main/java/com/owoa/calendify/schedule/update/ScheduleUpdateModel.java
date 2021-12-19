@@ -4,7 +4,7 @@ import com.owoa.calendify.schedule.create.Contract;
 import com.owoa.calendify.server.ServerData;
 
 public class ScheduleUpdateModel extends ServerData {
-    final static String REQUEST_SCHEDULE_UPDATE_URL = URL + "schedule/create.php";
+    final static String REQUEST_SCHEDULE_UPDATE_URL = URL + "schedule/update.php";
     Contract.Presenter presenter;
 
     public ScheduleUpdateModel(Contract.Presenter presenter){
